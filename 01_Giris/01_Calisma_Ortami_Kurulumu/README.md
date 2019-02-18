@@ -1,4 +1,6 @@
-# Çalışma Ortamı
+# **Çalışma Ortamı Kurulumu**
+
+## **Temel Kurulumlar***
 
 * ### Hangi İşletim Sistemi Kullanıyoruz
 Biz geliştirmeleri **"Ubuntu 18.04 LTS - bionic"** işletim sisteminde gerçekleştiriyoruz. İndirmek için;
@@ -24,7 +26,7 @@ mkdir ~/go/bin
 
 echo "#GOLANG Settings" >> ~/.profile
 echo export GOPATH=\$HOME/go >> ~/.profile
-echo export PATH=\$PATH:/usr/local/go/bin >> ~/.profile
+echo export PATH=\$PATH:\$GOPATH/bin >> ~/.profile
 
 sudo su
 echo export PATH=\$PATH:/usr/local/go/bin >> /etc/profile
@@ -32,45 +34,48 @@ exit
 
 source ~/.profile
 ```
-Bu işlemlerden sonra cihazınızı yeniden başlatınız.
+**Bu işlemlerden sonra cihazınızı yeniden başlatınız.**
 
-* ### IDE Nedir ?
+## **IDE Kurulumu**
+
+### **IDE Nedir ?**
 **IDE** kısaltmasının açılmış hali **"Integrated Development Environment"** demektir. Türkçe çevirisi **"Entegre Geliştirme Ortamı"** dır.
 
-  Aslında **IDE** bizim **yazılım projelerimizi**, rahat **programlayabilmek** için bir çok imkan sağlayan **geliştirme ortamıdır**. **Renklendirme, otomatik düzenleme, hata denetimi gerçekleştirme, derleme, çalıştırma, fonksiyonlar ve sınıflar arası gezinme** gibi bir çok kolaylıklar sağlamaktadır.
+Aslında **IDE** bizim **yazılım projelerimizi**, rahat **programlayabilmek** için bir çok imkan sağlayan **geliştirme ortamıdır**. **Renklendirme, otomatik düzenleme, hata denetimi gerçekleştirme, derleme, çalıştırma, fonksiyonlar ve sınıflar arası gezinme** gibi bir çok kolaylıklar sağlamaktadır.
 
-  Proje ne kadar büyük ve karmaşıksa, **IDE** gereksinimi o kadar artmaktadır.  
+Proje ne kadar büyük ve karmaşıksa, **IDE** gereksinimi o kadar artmaktadır.  
 
-* ### Hangi IDE'leri Kullanabiliriz
-**GO** için bir çok **IDE** seçeneği bulunmaktadır. Bunlardan en çok kullanılanları;
+### **Hangi IDE'leri Kullanabiliriz**
+**GO**, bir text editörüyle bile çok rahat geliştirilebilmektedir. Bunun için bazı araçlar indirmek yeterlidir. Ama bir çok **IDE** seçeneğide bulunmaktadır. Bunlardan en çok kullanılanları;
 
-## Geliştirme Ortamları
+#### **Geliştirme Ortamları Listesi ;**
 > https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins
 
-> Goland (ücretli)
+#### **VIM ;**
+> https://www.vim.org/
 
-  #### VIM ;
-  > https://www.vim.org/
+#### **Visual Code ;**
+> https://code.visualstudio.com/
 
-  #### Visual Code ;
-  > https://code.visualstudio.com/
+#### **Atom ;**
+> https://atom.io
 
-  #### Atom
-  > https://atom.io
+#### **Goland (ücretli) ;**
+> https://www.jetbrains.com/go/
   
 
+### **Biz Hangi IDE de Kod Geliştirdik, Neden?**
+Biz kodlarımızı **"Visual Code"** da geliştirdk. Bunun amacı, çoğu **IDE** de olduğu gibi otomatik bazı işleri **yapmıyor** oluşu. Yani program sırasında otomatik bazı dosyaları oluşturmuyor. Yada arka planda kolaylıklar **sağlamıyor**. Her şey bizim kontrolümüz altında oluyor. **İlk öğrenme sırasında** otomatik olan işlemler, belki bazı konuları kavramada zorluk yaşatabilir. Fakat siz gönlünüzden hangi ortamda kod yazmak istiyorsanız onu seçebilirsiniz. Hatta daha önce bahsettiğim gibi hiç **IDE** kullanmadan, basit bir **text editöründe** dahi programlayabilirsiniz.
 
-* ### Biz Hangi IDE de Kod Geliştirdik, Neden?
-Biz kodlarımızı **"Visual Code"** da geliştirdk. Bunun amacı, çoğu **IDE** de olduğu gibi otomatik bazı işleri **yapmıyor** oluşu. Yani program sırasında otomatik bazı dosyaları oluşturmuyor. Yada arka planda kolaylıklar **sağlamıyor**. Her şey bizim kontrolümüz altında olıyor. **İlk öğrenme sırasında** otomatik olan işlemler, belki bazı konuları kavramada zorluk yaşatabilir. Fakat siz gönlünüzden hangi ortamda kod yazmak istiyorsanız onu seçebilirsiniz. Hatta hiç **IDE** kullanmadan, basit bir **text editöründe** dahi programlayabilirsiniz.
-
-* ### Nasıl Yüklenir
+### Nasıl Yüklenir
 İlk adım olarak terminalden aşağıdaki kodları çalıştırarak **"Visual Code"** editörü indirip kuruyoruz.
+
 ``` bash
 wget https://go.microsoft.com/fwlink/?LinkID=760868 code_1.31.0-1549443364_amd64.deb -O code_1.31.0-1549443364_amd64.deb
 sudo dpkg -i code_1.31.0-1549443364_amd64.deb
 ```
 
-  **"Visual Code"** bir çok programlama dili için eklentiler sağlamaktadır. Bizde **"GO"** için bir eklenti kullanacağız.
+**"Visual Code"** bir çok programlama dili için eklentiler sağlamaktadır. Bizde **"GO"** için bir eklenti kullanacağız.
 
   ##### Adım 1 :
 
@@ -89,9 +94,9 @@ sudo dpkg -i code_1.31.0-1549443364_amd64.deb
   ##### Adım 5
   ![Adım4](Resim/05_VC.png)
 
-### VIM İşlemleri
 
-## VIM için
+### VIM  İşlemleri
+Eğer **"VIM"** kullanmak istiyorsanız, aşağıdaki adımları takip ediniz.
 
 > http://blog.oguzhan.info/?p=1248
 
@@ -104,7 +109,10 @@ mkdir .vim/bundle
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 ```
-## .vimrc :
+
+Bilgisayarınızın **"HOME"** alanına ismi **".vimrc"** olan bir dosya oluşturun. Belirtilen verileri içini yazınız.
+
+#### .vimrc :
 
 ```bash
 call pathogen#infect()
@@ -154,22 +162,17 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 ```
 
-
-
-
 ## GO Eklentilerini İndirmek İçin :
-
+Bütün bu işlemlerden sonra **"vim"** içine girip **":"**  dedikten sonra aşağıdaki komutu yazarsanız otomatik go araçlarını indirecek ve gerekli yerlere kuracaktır.
 > vim in :GoInstallBinaries
 
 
-## Vim Komutları
-
-> :Explore - Dosya Gezgini
-> :NERDTreeToggl - Dosy Gezgini
 
 
 
-### İsteğe Bağlı TagBAR
+## İsteğe Bağlı Eklentiler 
+
+### TagBAR
 ```bash 
 go get -u github.com/jstemmer/gotags
 cd ~/.vim/bundle
@@ -208,7 +211,16 @@ let g:tagbar_type_go = {
 \ }
 ```
 
-## Alternatif GO Tool
+## Nerdtree
+```bash
+cd ~/.vim/bundle
+git clone https://github.com/scrooloose/nerdtree.git
+```
+
+
+# **Alternatif GO Tool**
+Eğer bir **"IDE"** kullanmak istemiyorsanız, fakat GO'nun sağladığı araçlar yardımı ile geliştirme yapmak istiyorsanız aşağıdaki komutları çalıştırın ve gerekli araçları indirin.
+
 ```bash
 go get -u -v golang.org/x/tools/...
 go get -u -v golang.org/x/tools/cmd/godoc
@@ -220,11 +232,22 @@ go get -u -v github.com/fatih/gomodifytags
 go get -u -v github.com/newhook/go-symbols
 ```
 
-### Kullanımı
+### **Kullanımı**
+En çok kullanılan araçlar şu şekildedir
+
+Bir projeye bir çok paket eklenmektedir. Bunlar GO'nun kendi paketleri, sizin yazdıklarınız yada indirdiğiniz paketler olabilir. Siz bu paketlerin hepsinin isimlerini ezbere bilmenize gerek yok. İlgili kodları projede kullandıktan sonra aşağıdaki GO aracını çalıştırınca otomatik olarak paketleri eklemektedir. 
 > goimports -w main.go
+
+GO'nun bir biçimlendirme şekli vardır. Fakat siz kaç boşluk bıraktığınızı yada nerede yeni satıra geçmeniz gerektiğinizi ezbere bilmek zorunda değilsiniz. Bunun için aşağıdaki komutu çalıştırırsanız, projeniz otomatik olarak düzenlenecektir.
 > gofmt -w main.go
+
+GO'da bazı kuralların dışında iyi bir GO programcısının yapması gereken bazı işlemler vardır. Bunlar public fonksiyon, değişken v.b. açıklama yazmak, isimlendirme kuralları... Aşağıdaki GO aracı bu kurallara uymayan ksımları size gösterir. 
 > golint main.go
+
+Programlama sırasında JSON yada XML tipleri ile uğraşabilirsiniz. GO'da ileriki zamanlarda göreceğiniz üzere bir **"struct"** direk JSON'a yada JSON'dan çevirme işlemleri yapabilirsiniz. Bunun için gerekli etiketleme sistemini aşağıdaki araç ile kolayca yapabilirsiniz. Aynı zamanda verilen bir JSON'ı otomatik **"struct"**'a çevirmek için çok kullanışlı bir site de bulunmatkadır. **"https://mholt.github.io/json-to-go/"** 
 > gomodifytags -w -file main.go -struct STRUCT_ISMI -add-tags json
+
+Proje içerisinde bulunan fonksiyon, type leri json olarak gösteren aracı şu şekilde kullanabilirsiniz.
 > go-symbols <project_path>
 
 

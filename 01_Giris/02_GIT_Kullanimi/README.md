@@ -16,7 +16,7 @@ Bununla ilgili bir çok kaynak mevcut. Ama ben en azından bu proje ile ilgili k
 
  > sudo apt-get install git -y
 
- Bizim projemiz **"GITHUB"** ortamında. En büyük **GIT** platformu **"GITHUB"**. Ücretsiz kayıt olabileceğiniz, ücretsiz kod paylaşabileceğiniz bir ortam. Ama yazacağınız kodların herkese açık olması gerekmektedir. Eğer sadece kendiniz yada izin vereceğiniz kişiler tarafından kodlarınız geliştiilmesini istiyorsanız, o zaman belli bir meblağ ödemeniz gerekmektedir.
+ Bizim projemiz **"GITHUB"** ortamında. En büyük **GIT** platformu **"GITHUB"**. Ücretsiz kayıt olabileceğiniz, ücretsiz kod paylaşabileceğiniz bir ortam. Ama yazacağınız kodların herkese açık olması gerekmektedir. Eğer sadece kendiniz yada izin vereceğiniz kişiler tarafından kodlarınız geliştirilmesini istiyorsanız, o zaman belli bir meblağ ödemeniz gerekmektedir.
 
  Şimdi projemizi bilgisayarımıza indirelim;
 
@@ -35,3 +35,11 @@ Bununla ilgili bir çok kaynak mevcut. Ama ben en azından bu proje ile ilgili k
    > git push orgin master
 
    **git push** : Yapılan **commit**'i uzak repodaki, bizim bu durumda **GITHUB**'a gönderme işlemini gerçekleştirir.
+
+Eğer bir go projesini indirmek istiyorsanız, aşağıdaki gibi indiriniz. GO düzenli bir şekilde indirir, kurulması gereken bir şey varsa kurar. 
+
+  > go get https://github.com/KMACEL/TR-GO.git
+
+İndirdiği yer;
+
+  > ~/go/src/github.com/KMACEL/TR-GO/

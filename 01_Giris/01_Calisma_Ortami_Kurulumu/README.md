@@ -79,19 +79,32 @@ sudo dpkg -i code_1.31.0-1549443364_amd64.deb
 
   ##### Adım 1 :
 
+  İlk olarak sol menüde bulunan **"Extensions"** sekmesine tıklayınız
+
   ![Adım1](Resim/01_VC.png)
 
   ##### Adım 2 :
 
+  Açılan menüde, arama kısmına **"Go"** yazınız. Arama sunucunda **"Go"** eklentisi çıkacak. Ona tıkladığınızda bir sayfa açılacak. Açılan sayfada **"Install"** butonuna basınız. 
+
   ![Adım2](Resim/02_VC.png)
 
   ##### Adım 3 :
+
+  Eğer bilgisayarınızda **"Go"** araçları yoksa, bunları indirmek gerekmektedir. Sayfanın sağ alt köşesinde resimdeki gibi bir bilgilendirme ekranı çıakcak. Gelen ekranda **"Install All"** butonuna basarsanız, yüklemeleri gerçekleştirecektir.
+
   ![Adım3](Resim/03_VC.png)
 
   ##### Adım 4
+
+  Yükleme bitince böyle bir bildiri gelecek.
+
   ![Adım4](Resim/04_VC.png)
 
   ##### Adım 5
+
+  Artık **"Go"** geliştirmeye başlayabiliriz.
+
   ![Adım4](Resim/05_VC.png)
 
 
@@ -149,9 +162,6 @@ git clone https://github.com/scrooloose/syntastic
 ```
 #### Kullanımı
 > :SyntasticCheck go
-//#################################################################################
-	//Örnek2
-	//#################################################################################
 
 #### .vimrc Eklentisi :
 ```bash

@@ -1,0 +1,18 @@
+
+//###################################################################
+Merhabalar.
+StructTest:
+{{range .S1 }}
+İsim : {{.Isim}}
+Soyisim : {{.Soyisim}}
+Yas : {{.Yas}}
+{{end}}
+
+StructTest2
+{{range .S2}}
+İsim : {{.AnneIsim}}
+Soyisim : {{.BabaIsim}}
+{{end}}
+
+
+//###################################################################

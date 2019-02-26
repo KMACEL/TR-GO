@@ -28,13 +28,18 @@ func kes(s string) string {
 }
 
 func init() {
-	//	tpl = template.Must(template.ParseGlob("*.txt"))
-	tpl2 = template.Must(template.New("").Funcs(funcmap).ParseFiles("test_funcmap.txt"))
 
+	tpl = template.New("")
+	tpl.Funcs(funcmap)
+	tpl.ParseGlob("*.txt")
+
+	//tpl = template.Must(template.ParseGlob("*.txt"))
+
+	//tpl2 = template.Must(template.New("").Funcs(funcmap).ParseFiles("test_funcmap.txt"))
 }
 
 func main() {
-	/*tmplt, err := template.ParseFiles("test.txt")
+	tmplt, err := template.ParseFiles("test.txt")
 
 	if err != nil {
 		log.Fatalln(err.Error())
@@ -152,15 +157,20 @@ func main() {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	//###################################################################*/
-
+	/*//###################################################################
 	stFuncMap := []StructTest{
 		{Isim: "Mert", Soyisim: "Acel", Yas: 25},
 		{Isim: "Kübra", Soyisim: "Acel", Yas: 25},
 	}
 
-	err := tpl2.Execute(os.Stdout, stFuncMap)
-	if err != nil {
-		log.Fatalln(err.Error())
+	structFuncMap := struct {
+		S1 []StructTest
+	}{
+		stFuncMap,
 	}
+
+	err := tpl2.ExecuteTemplate(os.Stdout, "test_funcmap.txt", structFuncMap)
+	if err != nil {
+		log.Fatalln(err)
+	}*/
 }

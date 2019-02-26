@@ -2,9 +2,9 @@
 //###################################################################
 Merhabalar.
 StructTest:
-{{range .StructTest}}
-İsim : {{buyult .Isim}}
-Soyisim : {{.Soyisim}}
-Yas : {{.Yas}}
-{{end}}
+{range .S1}
+İsim : {buyult .Isim}
+Soyisim : {kes .Soyisim}
+Yas : {.Yas}
+{end}
 //###################################################################

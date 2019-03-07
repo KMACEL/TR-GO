@@ -27,7 +27,7 @@ mkdir ~/go/bin
 echo "#GOLANG Settings" >> ~/.profile
 echo export GOPATH=\$HOME/go >> ~/.profile
 echo export PATH=\$PATH:\$GOPATH/bin >> ~/.profile
-
+echo export PATH=\$PATH:/usr/local/go/bin >> ~/.profile
 sudo su
 echo export PATH=\$PATH:/usr/local/go/bin >> /etc/profile
 exit

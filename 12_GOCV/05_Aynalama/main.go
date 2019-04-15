@@ -15,20 +15,20 @@ func main() {
 	//gocv.Rotate(img, &img, gocv.Rotate180Clockwise)
 
 	// Uzun Yöntem :
-	// eğer siyah beyaz yapılacaksa img.SetUCharAt() kullanılmalı
-	//gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+
+	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
 	img.CopyTo(&img2)
 
 	for i := 0; i < img.Rows(); i++ {
 		for j := 0; j < img.Cols(); j++ {
 
-			p := img.GetIntAt(i, j)
+			p := img.GetUCharAt(i, j)
 
-			newX := -i + img.Rows()
-			newY := j
+			newX := i
+			newY := -j + img.Cols()
 
 			if newX > 0 && newX < img.Rows() && newY >= 0 && newY < img.Cols() {
-				img2.SetIntAt(newX, newY, p)
+				img2.SetUCharAt(newX, newY, p)
 			}
 		}
 	}

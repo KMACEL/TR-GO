@@ -29,8 +29,10 @@ func main() {
 		for j := 0; j < img.Cols(); j = j + 2 {
 
 			p := img.GetUCharAt(i, j)
+			p2 := img.GetUCharAt(i, j)
+			t := (int(p) + int(p2)) / 2
 
-			img2.SetUCharAt(x, y, p)
+			img2.SetUCharAt(x, y, uint8(t))
 			y++
 		}
 		x++

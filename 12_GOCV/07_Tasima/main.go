@@ -19,7 +19,6 @@ func main() {
 
 	// Yöntem 1 :
 	//img3 := gocv.NewMat()
-	//gocv.Rotate(img, &img, gocv.Rotate180Clockwise)
 	//img3 = gocv.GetRotationMatrix2D(image.Point{500, 700}, 0.0, 0.8)
 	//gocv.WarpAffine(img, &img2, img3, image.Point{img2.Rows(), img2.Cols()})
 

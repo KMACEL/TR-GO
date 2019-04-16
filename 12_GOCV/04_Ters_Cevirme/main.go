@@ -34,6 +34,8 @@ func main() {
 	}
 
 	window := gocv.NewWindow("Ters Çevirme")
+	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
 	window.IMShow(img2)
 	window.WaitKey(0)
 

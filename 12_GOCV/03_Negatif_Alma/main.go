@@ -46,6 +46,8 @@ func main() {
 	}
 
 	window := gocv.NewWindow("Negatif ALma")
+	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
 	window.IMShow(img)
 	window.WaitKey(0)
 

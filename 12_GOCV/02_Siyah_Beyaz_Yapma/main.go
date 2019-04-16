@@ -39,6 +39,8 @@ func main() {
 	}
 
 	window := gocv.NewWindow("Siyah Beyaz Yapma")
+	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
 	window.IMShow(img)
 	window.WaitKey(0)
 }

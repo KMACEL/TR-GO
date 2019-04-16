@@ -8,10 +8,14 @@ func main() {
 	img := gocv.NewMat()
 	img2 := gocv.NewMat()
 
+	defer img.Close()
+	defer img2.Close()
+
 	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
 	img2 = gocv.NewMatWithSize(1500, 1500, gocv.MatTypeCV8U)
 
 	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+	img2.SetTo(gocv.Scalar{255, 255, 255, 255})
 
 	// Yöntem 1 :
 	//img3 := gocv.NewMat()

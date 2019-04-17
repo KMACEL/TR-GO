@@ -1,8 +1,6 @@
 package main
 
 import (
-	"image"
-
 	"gocv.io/x/gocv"
 )
 
@@ -19,16 +17,35 @@ func main() {
 	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
 
 	// Yöntem 1 :
-	img3 := gocv.NewMat()
-	img3 = gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 1.5)
+	/*img3 := gocv.NewMat()
+	img3 = gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2)
 
-	gocv.WarpAffine(img, &img2, img3, image.Point{X: 0, Y: 0})
+	gocv.WarpAffine(img, &img2, img3, image.Point{X: 0, Y: 0})*/
 
 	// Uzun Yöntem :
-	/*for i := 0; i < img.Rows(); i++{
+	for i := 0; i < img.Rows(); i++ {
 		for j := 0; j < img.Cols(); j++ {
+
+			p := img.GetUCharAt(i, j)
+
+			if i*2 > 0 && i*2 < img.Rows() && j*2 >= 0 && j*2 < img.Cols() {
+				img2.SetUCharAt(i*2, j*2, p)
+			}
+
+			if i*2+1 > 0 && i*2+1 < img.Rows() && j*2 >= 0 && j*2 < img.Cols() {
+				img2.SetUCharAt(i*2+1, j*2, p)
+			}
+
+			if i*2 > 0 && i*2 < img.Rows() && j*2+1 >= 0 && j*2+1 < img.Cols() {
+				img2.SetUCharAt(i*2, j*2+1, p)
+			}
+
+			if i*2+1 > 0 && i*2+1 < img.Rows() && j*2+1 >= 0 && j*2+1 < img.Cols() {
+				img2.SetUCharAt(i*2+1, j*2+1, p)
+			}
+
 		}
-	}*/
+	}
 
 	window := gocv.NewWindow("Büyültme-Yakınlaştırma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)

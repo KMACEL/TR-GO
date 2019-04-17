@@ -6,6 +6,17 @@ import (
 	"gocv.io/x/gocv"
 )
 
+/*
+	----------
+	|p1|p2|p3|
+	----------
+	|p4|p5|p6|
+	----------
+	|p7|p8|p9|
+	----------
+*/
+// Formül : |G| =|((p1+2*p2+p3)-(p7+2*p8+p9))| + |((p3+2*p6+p9)-(p1+2*p4+p7))|
+
 func main() {
 	img := gocv.NewMat()
 	img2 := gocv.NewMat()
@@ -26,33 +37,33 @@ func main() {
 		for y := 0; y < img.Cols(); y++ {
 
 			p := img.GetIntAt(x-1, y-1)
-			c1 := (p >> 16) & 0xff
+			p1 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x, y-1)
-			c2 := (p >> 16) & 0xff
+			p2 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x+1, y-1)
-			c3 := (p >> 16) & 0xff
+			p3 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x-1, y)
-			c4 := (p >> 16) & 0xff
+			p4 := (p >> 16) & 0xff
 
 			//p = img.GetUCharAt(x, y)
-			//c5 := (p >> 16) & 0xff
+			//p5 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x+1, y)
-			c6 := (p >> 16) & 0xff
+			p6 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x-1, y+1)
-			c7 := (p >> 16) & 0xff
+			p7 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x, y+1)
-			c8 := (p >> 16) & 0xff
+			p8 := (p >> 16) & 0xff
 
 			p = img.GetIntAt(x+1, y+1)
-			c9 := (p >> 16) & 0xff
+			p9 := (p >> 16) & 0xff
 
-			pValue := math.Abs(float64(c1+2*c2+c3)-float64(c7+2*c8+c9)) + math.Abs(float64(c3+2*c6+c9)-float64(c1+2*c4+c7))
+			pValue := math.Abs(float64((p1+2*p2+p3)-(p7+2*p8+p9))) + math.Abs(float64((p3+2*p6+p9)-(p1+2*p4+p7)))
 
 			if pValue > 255 {
 				pValue = 255

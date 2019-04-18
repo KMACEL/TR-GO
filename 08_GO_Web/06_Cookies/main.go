@@ -7,10 +7,6 @@ import (
 	"time"
 )
 
-// Kodları çalıştırıp aşağıdaki linki tarayıcınıza kopyalayıp çalıştırdığınızda
-// Çalıştırdığınız terminalde, ilgili paremetreleri göreceksiniz
-// http://localhost:9090/test/test2/?username=mert&password=1234
-
 func cookies(w http.ResponseWriter, r *http.Request) {
 	expiration := time.Now().Add(365 * 24 * time.Hour)
 	cookie := http.Cookie{Name: "username", Value: "Mert", Expires: expiration}

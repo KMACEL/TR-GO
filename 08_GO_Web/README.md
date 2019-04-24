@@ -1,6 +1,7 @@
 # Web Uygulamaları
 
 ## Yüklemeler
+
 Bu bölümde, sessions bölümünde kullanılmak üzere, Gorilla Web Toolkit'ini yüklemememiz gerekmektedir.
 
 ```bash
@@ -35,4 +36,4 @@ go get github.com/gorilla/sessions
 >
 > Cloud Native programming with Golang : Mina Andrawos, Martin Helmich
 >
-> https://gowebexamples.com/
+> <https://gowebexamples.com/>

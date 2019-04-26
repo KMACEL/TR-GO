@@ -73,13 +73,25 @@ GO'da paket bağımlılıklarını kontrol eden **dep** scripti bulunmaktadır. 
 go get -u github.com/golang/dep/cmd/dep
 ```
 
-MongoDB, GO Driver'ı için;
+MongoDB, GO Driver'ı nı sisteme kurmak için;
 
 ```bash
-go get go.mongodb.org/mongo-driver/mongo
+go get -v -u go.mongodb.org/mongo-driver
 cd $GOPATH/src/go.mongodb.org/mongo-driver/
-dep  ensure -v -update
+git checkout -b v1.0.1 v1.0.1
+dep ensure -update
+dep status
 ```
+
+**dep**, bir proje dosyası içine bütün bağlılıklarını ekleyen bir sistemi bulunmaktadır. Biz, örnek kullandığımız MongoDB klasörü altına aşağıdaki komutları çalıştırarak, MongoDB eklentilerini kurabiliriz;
+
+```bash
+dep init
+dep ensure -add "go.mongodb.org/mongo-driver/mongo@~1.0.1"
+dep ensure -update -no-vendor -v
+```
+
+**"vendor"** klasörünün altına baktığınızda **"mongodb"** bağımlılıkları eklediğini göreceksiniz. Eğer **"dep ensure -update"** derseniz ve MongoDB driverını kullanmıyorsanız, **vendor** altındaki bağımlılıkları otomatik olarak siler. ("GO" da bir şey kullanmazsanız, silinir :))
 
 ## Not
 

@@ -54,4 +54,23 @@ func main() {
 	default:
 		fmt.Println("Yukarıdakilerin hiç biri")
 	}
+
+	//------------------------------------------------------
+	// SWITCH - CASE - DEFAULT - fallthrough Kullanımı
+	//------------------------------------------------------
+
+	d := 20
+
+	switch {
+	case d < 5:
+		fmt.Println("D değeri 5")
+	case d > 10:
+		fmt.Println("D değeri 10")
+		fallthrough
+	case d <= 20:
+		fmt.Println("D değeri 20")
+	default:
+		fmt.Println("Yukarıdakilerin hiç biri")
+	}
+
 }

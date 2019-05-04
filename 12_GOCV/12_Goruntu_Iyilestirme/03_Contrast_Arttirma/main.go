@@ -5,7 +5,7 @@ import (
 )
 
 /*
-(x,y) = (x+10,y+10)
+I'(x,y) = I(x,y) * K
 */
 
 func main() {
@@ -15,34 +15,29 @@ func main() {
 	defer img.Close()
 	defer img2.Close()
 
-	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
+	img = gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
 	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
 	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
 
-	//img2.SetTo(gocv.Scalar{255, 255, 255, 255})
-
 	// Yöntem 1 :
-	//img3 := gocv.NewMat()
-	//img3 = gocv.GetRotationMatrix2D(image.Point{500, 700}, 0.0, 0.8)
-	//gocv.WarpAffine(img, &img2, img3, image.Point{img2.Rows(), img2.Cols()})
+	//gocv.ConvertScaleAbs(img, &img2, 5.0, 1.0)
 
 	// Uzun Yöntem :
+	value := 5
 	for i := 0; i < img.Rows(); i++ {
 		for j := 0; j < img.Cols(); j++ {
-
 			p := img.GetUCharAt(i, j)
 
-			newX := i + 200
-			newY := j + 300
-
-			if newX > 0 && newX < img.Rows() && newY >= 0 && newY < img.Cols() {
-				img2.SetUCharAt(newX, newY, p)
+			if t := int(p) * value; t > 255 {
+				img2.SetUCharAt(i, j, 255)
+			} else {
+				img2.SetUCharAt(i, j, uint8(t))
 			}
 		}
 	}
 
-	window := gocv.NewWindow("Taşıma")
+	window := gocv.NewWindow("Parlaklık Arttırmak")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
 	window.IMShow(img2)

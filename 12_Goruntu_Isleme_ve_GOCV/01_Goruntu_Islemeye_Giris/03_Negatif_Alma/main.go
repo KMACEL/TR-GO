@@ -9,24 +9,23 @@ import (
 func main() {
 
 	img := gocv.NewMat()
-	img2 := gocv.NewMat()
+	imgTotal := gocv.NewMat()
 
 	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img.CopyTo(&img2)
+	img.CopyTo(&imgTotal)
 
 	// Yöntem 1 :
-
 	//gocv.BitwiseNot(img, &img)
 
 	// Uzun Yöntem :
-	for i := 0; i < img.Rows(); i++ {
-		for j := 0; j < img.Cols(); j++ {
+	for x := 0; x < img.Rows(); x++ {
+		for y := 0; y < img.Cols(); y++ {
 
 			// 1. Uzun yöntem
-			//img2.SetIntAt(i, j, 255-img.GetIntAt(i, j))
+			//imgTotal.SetIntAt(x, y, 255-img.GetIntAt(x, y))
 
 			//2. Dahada uzun yötem
-			p := img.GetIntAt(i, j)
+			p := img.GetIntAt(x, y)
 
 			a := (p >> 24) & 0xff
 			r := (p >> 16) & 0xff
@@ -40,16 +39,16 @@ func main() {
 			b = 255 - b
 
 			//Yeni değerleri piksele giriyoruz
-			p = (r << 24) | (r << 16) | (g << 8) | b
+			pTotal := (r << 24) | (r << 16) | (g << 8) | b
 
-			img2.SetIntAt(i, j, p)
+			imgTotal.SetIntAt(x, y, pTotal)
 		}
 	}
 
 	window := gocv.NewWindow("Negatif ALma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
 
 }

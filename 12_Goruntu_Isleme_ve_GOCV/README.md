@@ -588,4 +588,11 @@ Kodları çalıştırdığımızda karşımıza çıkan sonuç şu şekildedir.
 ## Kaynak
 
 > <https://gocv.io/>
+>
 > <https://opencv.org/>
+>
+> Ahmet Yesevi Üniversitesi - Türtep
+>
+> <http://www.ibrahimcayiroglu.com>
+>
+> <http://web.firat.edu.tr>

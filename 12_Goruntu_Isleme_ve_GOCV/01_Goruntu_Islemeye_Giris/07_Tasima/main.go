@@ -28,13 +28,13 @@ func main() {
 	//gocv.WarpAffine(img, &img2, img3, image.Point{img2.Rows(), img2.Cols()})
 
 	// Uzun Yöntem :
-	for i := 0; i < img.Rows(); i++ {
-		for j := 0; j < img.Cols(); j++ {
+	for x := 0; x < img.Rows(); x++ {
+		for y := 0; y < img.Cols(); y++ {
 
-			p := img.GetUCharAt(i, j)
+			p := img.GetUCharAt(x, y)
 
-			newX := i + 200
-			newY := j + 300
+			newX := x + 200
+			newY := y + 300
 
 			if newX > 0 && newX < img.Rows() && newY >= 0 && newY < img.Cols() {
 				img2.SetUCharAt(newX, newY, p)

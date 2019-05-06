@@ -1,12 +1,12 @@
-# Görüntü İşleme ve GOCV
+# **Görüntü İşleme ve GOCV**
 
- Bu bölümde görüntü işlemeye başlangıç yapılacaktır. Temel kavram ve teknikler öğretilmeyi hedeflenmiştir. Ders Kapsamında, **"GOCV"** kütüpanesi kullanılacaktır. Yapılan işlemler hem piksel bazında nasıl yapıldığı anlatılacak, hemde **"GOCV"** kütüphanesinde kullanım yöntemi gösterilecektir.
+ Bu bölümde görüntü işlemeye başlangıç yapılacaktır. Temel kavram ve teknikler öğretilmeyi hedeflenmiştir. Ders Kapsamında, **"GOCV"** kütüpanesi kullanılacaktır. Yapılan işlemler hem piksel bazında nasıl yapıldığı anlatılacak, hemde **"GOCV"** paketinde kullanım yöntemi gösterilecektir.
 
-## GOCV
+## **GOCV**
 
 **"GOCV"**, **"Hybridgroup"** tarafından **"Opencv"** kütüphanesinin **"Go"**ya uyarlanmış halidir. Şu an **Opencv**'nin resmi olarak **Go** kütüphanesi yoktur. Fakat **GOCV** oldukça iyi hazırlanmıştır. **GOCV** için **"<https://gocv.io/>"** adresine bakabilirsiniz.
 
-### Yükleme
+### **Yükleme**
 
 **GOCV** yüklemek için aşağıdaki komutları çalıştırın.
 
@@ -18,7 +18,7 @@ make install
 
 Eğer bir hata almadıysanız, artık çalışmalara başlayabiliriz.
 
-## Görüntü İşlemeye Giriş
+## **Görüntü İşlemeye Giriş**
 
 Bu bölümde, fotoğraf üzerinde bazı işlemler yapıp, filtreler uygulayacağız. Görüntü işlemenin temeline bakacağız.
 
@@ -26,11 +26,11 @@ Bu bölümde **"MERT_KUBRA_ERDEM.jpg"** üstünde işlemler yapacağız.
 
  ![Kullanilacak_Resim](01_Goruntu_Islemeye_Giris/MERT_KUBRA_ERDEM.jpg)
 
-### Merhaba Dünya
+### **Merhaba Dünya**
 
 Programlamada bir şeye başlanıyorsa, gelenek olarak **"Merhaba Dünya"** projesi ile başlanır. Bizde geleneği bozmayarak ilk projemize başlıyoruz. Bu projede, bir resmi nasıl açacağımızı inceleyeceğiz.
 
-İlk olarak **"GOCV"** kütüphanemizi projeye ekliyoruz;
+İlk olarak **"GOCV"** paketimizi projeye ekliyoruz;
 
 ```go
 import (
@@ -68,7 +68,7 @@ Son adım olarak, aılan pencerenin ekranda kalma süresini belirtiyoruz. Bunun 
 window.WaitKey(0)
 ```
 
-**NOT : Bu proje, ilk olduğu için uzun uzun anlattık. Bundan sonraki projelerde, daha önce anlatılan kısımlara yer verilmeyecektir.
+**NOT : Bu proje, ilk olduğu için uzun uzun anlattık. Bundan sonraki projelerde, daha önce anlatılan kısımlara yer verilmeyecektir.**
 
 Şimdi bütün programı görelim.
 
@@ -93,13 +93,13 @@ Projeyi çalıştırdığımızda, aşağıdaki gibi ekrana bir pencere gelecekt
 
 ![01_Merhaba_Dunya](01_Goruntu_Islemeye_Giris/resimler/01_Merhaba_Dunya.png)
 
-### Görüntüyü Siyah Beyaz Yapma
+### **Görüntüyü Siyah Beyaz Yapma**
 
 Görüntü işlemede, resimleri siyah - beyaz yapma oldukça önemli yer kaplamaktadır. Siyah beyaz görüntü iki boyutludur. Her piksel değeri 0 ile 255 arasında değer alır. Fakat renkli görüntüde üç boyut devreye girer ve her bir boyut için işlem yapmak gerekir.
 
 Bir resmi siyah beyaz yapmak için;
 
-#### Yöntem 1
+#### **Yöntem 1**
 
 İlk yöntem, ilgili fotoğrafın programa alınırken siyah beyaz olmasını belirtmek. Bunun için, **"IMRead"** fonksiyonun ikinci parametresine **"gocv.IMReadGrayScale"** olarak vermek;
 
@@ -107,7 +107,7 @@ Bir resmi siyah beyaz yapmak için;
 img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
 ```
 
-#### Yöntem 2
+#### **Yöntem 2**
 
 İkinci yöntem, görüntüyü orjinal haliyle alıp, **"CvtColor"** fonksiyonu ile çevirmek. Bu fonksiyon 3 parametre almaktadır.
 
@@ -122,7 +122,7 @@ img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
 gocv.CvtColor(img, &img, gocv.ColorBGRToGray)
 ```
 
-#### Yöntem 3
+#### **Yöntem 3**
 
 Bu yöntemde ise, her bir piksel üzerinde işlem yaparak sonucumuza ulaşıyoruz. Her bir piksel üzerinde işlem yapabilmek için **"for"** döngülerinden yararlanıyoruz. Bu yapı, bundan sonraki bölümlerde de oldukça kullanacağız. Bizim resmimizin bir boyutu bulunmakta. Bu boyutta satır ve sütunlar yer almaktadır. Her bir pikselin **"x,y"** koordinatları vardır. Bu kordinatlar içerisinde gezinmek için aşağıdaki yapıyı kullanmaktayız. Bu yapıda 2 fonksiyon kullanıyoruz.
 
@@ -257,13 +257,13 @@ Kodu çalıştırdıktan sonra ekrana çıkan sonuç;
 
 ![02_Siyah_Beyaz_Yapma](01_Goruntu_Islemeye_Giris/resimler/02_Siyah_Beyaz_Yapma.png)
 
-### Negatif Alma
+### **Negatif Alma**
 
 Görüntü işlmede diğer önemli yöntem görüntünün negatifini almaktır. Bunun için izlenecek yollar aşağıdadır. Bu proje 3 boyut yani renkli bir görüntü üzerinde gösterilecektir. Bundan sonraki bölümlerde, resim siyah beyaza döndürülüp gösterilecektir.
 
-#### Yöntem 1
+#### **Yöntem 1**
 
-Bu yöntem, gocv kütüphanesinde bulunan **"BitwiseNot" fonksiyonu ile yapılmaktadır. Bu fonksiyon iki parametre alır.
+Bu yöntem, gocv paketinde bulunan **"BitwiseNot" fonksiyonu ile yapılmaktadır. Bu fonksiyon iki parametre alır.
 
 * İlk parametre görüntünün alınacağı **Mat** türündeki değişken.
 
@@ -273,7 +273,7 @@ Bu yöntem, gocv kütüphanesinde bulunan **"BitwiseNot" fonksiyonu ile yapılma
 gocv.BitwiseNot(img, &img)
 ```
 
-#### Yöntem 2
+#### **Yöntem 2**
 
 Bu yöntemde yöne piksel piksel işlem yapılacaktır. Görüntünün tersini almak için kullanacağım formül **f(x;y)=255-g(x;y)**. Bu formüle göre, her piksel değeri 255 ten çıkartılacak. Projemizde, yapılan her işlemden sonra sonucu, yeni bir matrise yazacağız. Bunun için ilk önce **"imgTotal"** isminde bir matris oluşturacağız.
 
@@ -297,7 +297,7 @@ for x := 0; x < img.Rows(); x++ {
 }
 ```
 
-#### Yöntem 3
+#### **Yöntem 3**
 
 Bİr önceki bölümde yapılan çözüm her ne kadar çalışsada, aslında olması gereken her pikselin renklerini ayrıştırıp, her renkte bu işlemi yapıp tekrar birleştirmektir. Bunun için ;
 
@@ -387,13 +387,13 @@ Kodları çalıştırdıktan sonra gelen sonuç şu şekildedir.
 
 ![03_Negatif_Alma](01_Goruntu_Islemeye_Giris/resimler/03_Negatif_Alma.png)
 
-### Ters Çevirme
+### **Ters Çevirme**
 
 Bu bölümde resmi 180 derece açı ile çevirmeyi göreceğiz.
 
-#### Yöntem 1
+#### **Yöntem 1**
 
-İlk yöntemde, gocv kütüphanesinin **Rotate** fonksiyonu kullanalark bu işlemi gerçekleştireceğiz. Bu fonksiyon üç paremetre almakta. Bunlar;
+İlk yöntemde, gocv paketinin **Rotate** fonksiyonu kullanalark bu işlemi gerçekleştireceğiz. Bu fonksiyon üç paremetre almakta. Bunlar;
 
 * İlk parametre, verinin alınacağı resmin atandığı **Mat** türündeki matris değişkeni.
 
@@ -405,7 +405,7 @@ Bu bölümde resmi 180 derece açı ile çevirmeyi göreceğiz.
 gocv.Rotate(img, &img, gocv.Rotate180Clockwise)
 ```
 
-#### Yöntem 2
+#### **Yöntem 2**
 
 Bu yöntemde ilk adım olarak yeni bir **Mat** tipinde değişken oluşturuyoruz.
 
@@ -413,7 +413,7 @@ Bu yöntemde ilk adım olarak yeni bir **Mat** tipinde değişken oluşturuyoruz
 imgTotal := gocv.NewMat()
 ```
 
-Daha önce yeni oluşturduğumuz matrisimizi formatlarken, **Mat** yapısının **CopyTo** fonksiyonunu kullanmıştık. Şimdi ise daha kullanışlı olan gocv kütüphanesinin **"NewMatWithSize"** fonksiyonunu kullanacağız. Bu fonksiyon üç parametre olmakta.
+Daha önce yeni oluşturduğumuz matrisimizi formatlarken, **Mat** yapısının **CopyTo** fonksiyonunu kullanmıştık. Şimdi ise daha kullanışlı olan gocv paketinin **"NewMatWithSize"** fonksiyonunu kullanacağız. Bu fonksiyon üç parametre olmakta.
 
 * İlk parametre, yeni oluşturduğumuz matrisin satır uzunluğu,
 
@@ -491,13 +491,13 @@ Kodu çalıştırdığımızda sonuç aşağıdaki gibidir.
 
 ![04_Ters_Cevirme](01_Goruntu_Islemeye_Giris/resimler/04_Ters_Cevirme.png)
 
-### Aynalama
+### **Aynalama**
 
 Bu projemizde resmi aynalayacağız. Fark olarak, bu sefer resim siyah beyaz olacak.
 
-#### Yöntem 1
+#### **Yöntem 1**
 
-Bu yöntemde yine çok kullanışlı olan gocv kütüphanesinin **"Flip"** fonksiyonu göreceğiz. BU fonksiyon 3 paremetre almakta. Bunlar ;
+Bu yöntemde yine çok kullanışlı olan gocv paketinin **"Flip"** fonksiyonu göreceğiz. BU fonksiyon 3 paremetre almakta. Bunlar ;
 
 * İlk parametre işlem yapılacak resmin bulunduğu **Mat** tipindeki değişken,
 
@@ -509,7 +509,7 @@ Bu yöntemde yine çok kullanışlı olan gocv kütüphanesinin **"Flip"** fonks
 gocv.Flip(img, &img, 1)
 ```
 
-#### Yöntem 2
+#### **Yöntem 2**
 
 Bu yöntemde kulanılacak formül, **f(x,y)=(x,W - y)**. Burada bulunan **W** toplam genişlik anlamına gelmektedir.
 
@@ -542,7 +542,7 @@ Kodun tam hali aşağıdaki gibidir.
 package main
 
 import (
-	"gocv.io/x/gocv"
+    "gocv.io/x/gocv"
 )
 
 /*
@@ -585,7 +585,133 @@ Kodları çalıştırdığımızda karşımıza çıkan sonuç şu şekildedir.
 
 ![05_Aynalama](01_Goruntu_Islemeye_Giris/resimler/05_Aynalama.png)
 
-## Kaynak
+### **Belirtilen Açıya Göre Çevirme**
+
+Bu projede, verilen açı değeri kadar çevirmeyi göreceğiz.
+
+#### **Yöntem 1**
+
+Bu yöntemde, gocv paketinin sunduğu fonksiyonlar yardımıyla işlemlerimi gerçekleştireceğiz.
+
+İlk olarak, **"GetRotationMatrix2D"** ile bir matris oluşturacağız. Bu fonksiyon, bize nasıl özelliklerde oalcağını bildiriyor. Bu fonksiyon 3 parametre alıyor.
+
+* Birinci parametre, Go'nun kendi paketlerinden olan **"image"** paketinin, **"Point"** yapısı. Bu yapı, **X** ve **Y** koordinatlarını alıyor. Bu koordinatlar, resimin dönme merkezini belirliyor. Biz, **"X: img.Cols() / 2, Y: img.Rows() / 2"** şeklinde aldığımızda, orta noktadan dönmesi gerektiğini belirtiyoruz.
+
+* İkinci parametre dönme açısını belirtiyor. Açı + olursa saat yönünün tersi, - olursa saat yönünde döner
+
+* Üçüncü parametre ise yakınlaştırma derecesini belirtiyor. Bu değer eğer **1** ise normal boyutu anlamına gelmektedir.
+
+```go
+rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{X: img.Cols() / 2, Y: img.Rows() / 2}, 100, 1)
+```
+
+Ardıdnan gocv paketinin **"WarpAffine"** fonksiyonunu kullanıyoruz. Bu fonksiyon 4 parametre almakta.
+
+* İlk parametre, işlemin yapılacağı ana kaynağı belirten matris,
+
+* İkinci parametre, işlemlerden sonra değişikliklerin aktarılacağı matris,
+
+* Üçüncü parametre, **GetRotationMatrix2D** fonksiyonundan gelen matris.
+
+* Dördüncü parametre, çıktının görnütsünün boyutunu belirtmektedir. Eğer özel bir amacınız yoksa **0,0** veriniz.
+
+```go
+gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})
+```
+
+### **Yöntem 2**
+
+Bu yöntemde, bir formül kullanacağız. Bu formül, **x** için, **x1 = cosθ(x - x0) - sinθ(y-y0) + x0**, y için, **y1 = sinθ(x - x0) - cosθ(y-y0) + y0**
+
+İlk olarak **x0** ve **y0** değişkenlerini oluşturuyoruz. Bu değişkenler, dönüş merkezini belirtiyor.
+
+```go
+x0 := img.Rows() / 2
+y0 := img.Cols() / 2
+```
+
+Ardından dönüş açısını tanımlıyoruz ve gerekli olan işlemi gerçekleştiriyoruz.
+
+```go
+angleValue := 100.0
+angle := angleValue * 2 * math.Pi / 360
+```
+
+Son olarak, verilen formülü uyguluyoruz. Burada faklı olarak bir **"if"** bloğu yer almakta. İşlemler sonrası, bazı değerler negatif yada matrisin büyüklüğünden daha büyük değerler olabilir. Matrisimize eklerken hataya sebep olabilir. Bunu engellemek için gerekli işlemleri yapıyoruz.
+
+```go
+for i := 0; i < img.Rows(); i++ {
+    for j := 0; j < img.Cols(); j++ {
+        p := img.GetSCharAt(i, j)
+
+        newX := int(math.Cos(angle)*float64(i-x0) - math.Sin(angle)*float64(j-y0) + float64(x0))
+        newY := int(math.Sin(angle)*float64(i-x0) - math.Cos(angle)*float64(j-y0) + float64(y0))
+
+        if newX >= 0 && newX < imgTotal.Rows() && newY >= 0 && newY < imgTotal.Cols() {
+            imgTotal.SetUCharAt(newX, newY, uint8(p))
+        }
+    }
+}
+```
+
+Programın tam hali şu şekildedir;
+
+```go
+package main
+
+import (
+    "math"
+    "gocv.io/x/gocv"
+)
+
+/*
+  x1 = cosθ(x - x0) - sinθ(y-y0) + x0
+  y1 = sinθ(x - x0) - cosθ(y-y0) + y0
+*/
+
+func main() {
+    img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+    // Yöntem 1 :
+    //Açı + olursa saat yönünün tersi, - olursa saat yönünde döner
+    /*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{X: img.Cols() / 2, Y: img.Rows() / 2}, 100, 1)
+    gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
+
+    // Uzun Yöntem :
+    x0 := img.Rows() / 2
+    y0 := img.Cols() / 2
+
+    angleValue := 100.0
+    angle := angleValue * 2 * math.Pi / 360
+
+    for i := 0; i < img.Rows(); i++ {
+        for j := 0; j < img.Cols(); j++ {
+            p := img.GetSCharAt(i, j)
+
+            newX := int(math.Cos(angle)*float64(i-x0) - math.Sin(angle)*float64(j-y0) + float64(x0))
+            newY := int(math.Sin(angle)*float64(i-x0) - math.Cos(angle)*float64(j-y0) + float64(y0))
+
+            if newX >= 0 && newX < imgTotal.Rows() && newY >= 0 && newY < imgTotal.Cols() {
+                imgTotal.SetUCharAt(newX, newY, uint8(p))
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Belirtilen Açıya Göre Çevirme")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodları çalıştırdığımızda sonuç şu şekilde olacaktır;
+
+![06_Belirtilen_Aciya_Gore_Dondurme.png](01_Goruntu_Islemeye_Giris/resimler/06_Belirtilen_Aciya_Gore_Dondurme.png)
+
+
+## **Kaynak**
 
 > <https://gocv.io/>
 >

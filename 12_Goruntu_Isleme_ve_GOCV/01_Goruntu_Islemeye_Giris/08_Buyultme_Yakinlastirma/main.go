@@ -5,52 +5,40 @@ import (
 )
 
 func main() {
-	img := gocv.NewMat()
-	img2 := gocv.NewMat()
-
-	defer img.Close()
-	defer img2.Close()
-
-	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
-
-	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
 	// Yöntem 1 :
-	/*img3 := gocv.NewMat()
-	img3 = gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2)
-
-	gocv.WarpAffine(img, &img2, img3, image.Point{X: 0, Y: 0})*/
+	/*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2)
+	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
 	// Uzun Yöntem :
-	for i := 0; i < img.Rows(); i++ {
-		for j := 0; j < img.Cols(); j++ {
+	for x := 0; x <= img.Rows(); x++ {
+		for y := 0; y <= img.Cols(); y++ {
 
-			p := img.GetUCharAt(i, j)
+			p := img.GetUCharAt(x, y)
 
-			if i*2 > 0 && i*2 < img.Rows() && j*2 >= 0 && j*2 < img.Cols() {
-				img2.SetUCharAt(i*2, j*2, p)
+			if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+				imgTotal.SetUCharAt(x*2, y*2, p)
 			}
 
-			if i*2+1 > 0 && i*2+1 < img.Rows() && j*2 >= 0 && j*2 < img.Cols() {
-				img2.SetUCharAt(i*2+1, j*2, p)
+			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+				imgTotal.SetUCharAt(x*2+1, y*2, p)
 			}
 
-			if i*2 > 0 && i*2 < img.Rows() && j*2+1 >= 0 && j*2+1 < img.Cols() {
-				img2.SetUCharAt(i*2, j*2+1, p)
+			if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+				imgTotal.SetUCharAt(x*2, y*2+1, p)
 			}
 
-			if i*2+1 > 0 && i*2+1 < img.Rows() && j*2+1 >= 0 && j*2+1 < img.Cols() {
-				img2.SetUCharAt(i*2+1, j*2+1, p)
+			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+				imgTotal.SetUCharAt(x*2+1, y*2+1, p)
 			}
-
 		}
 	}
 
 	window := gocv.NewWindow("Büyültme-Yakınlaştırma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

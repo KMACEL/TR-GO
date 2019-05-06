@@ -5,39 +5,27 @@ import (
 )
 
 /*
-(x,y) = (x+10,y+10)
+(x,y) = (x+A,y+B)
 */
 
 func main() {
-	img := gocv.NewMat()
-	img2 := gocv.NewMat()
 
-	defer img.Close()
-	defer img2.Close()
+	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
-	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+	a := 200
+	b := 300
 
-	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
-
-	//img2.SetTo(gocv.Scalar{255, 255, 255, 255})
-
-	// Yöntem 1 :
-	//img3 := gocv.NewMat()
-	//img3 = gocv.GetRotationMatrix2D(image.Point{500, 700}, 0.0, 0.8)
-	//gocv.WarpAffine(img, &img2, img3, image.Point{img2.Rows(), img2.Cols()})
-
-	// Uzun Yöntem :
 	for x := 0; x < img.Rows(); x++ {
 		for y := 0; y < img.Cols(); y++ {
 
 			p := img.GetUCharAt(x, y)
 
-			newX := x + 200
-			newY := y + 300
+			newX := x + a
+			newY := y + b
 
-			if newX > 0 && newX < img.Rows() && newY >= 0 && newY < img.Cols() {
-				img2.SetUCharAt(newX, newY, p)
+			if newX >= 0 && newX <= imgTotal.Rows() && newY >= 0 && newY <= imgTotal.Cols() {
+				imgTotal.SetUCharAt(newX, newY, p)
 			}
 		}
 	}
@@ -45,7 +33,6 @@ func main() {
 	window := gocv.NewWindow("Taşıma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

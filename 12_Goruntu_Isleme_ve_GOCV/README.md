@@ -710,6 +710,61 @@ Kodları çalıştırdığımızda sonuç şu şekilde olacaktır;
 
 ![06_Belirtilen_Aciya_Gore_Dondurme.png](01_Goruntu_Islemeye_Giris/resimler/06_Belirtilen_Aciya_Gore_Dondurme.png)
 
+### Görüntü Taşıma
+
+Bu bölümde, görüntüyü taşımayı inceleyeceğiz.
+
+Görüntü taşıma, **bütün** piksellerin x ve y değerine, belirttiğimiz bir sayıyı eklemektir. Formül olarak şu şekilde ifade ediyoruz, **(x,y) = (x+A,y+B)**
+
+Bu kolay bir yöntem olduğu için, bütün kodu verelim;
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+(x,y) = (x+A,y+B)
+*/
+
+func main() {
+
+    img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    a := 200
+    b := 300
+
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+
+            p := img.GetUCharAt(x, y)
+
+            newX := x + a
+            newY := y + b
+
+            if newX >= 0 && newX <= imgTotal.Rows() && newY >= 0 && newY <= imgTotal.Cols() {
+                imgTotal.SetUCharAt(newX, newY, p)
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Taşıma")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodları çalıştırdığımızda ekran şu şekilde olacaktır.
+
+![07_Tasima.png](01_Goruntu_Islemeye_Giris/resimler/07_Tasima.png)
+
+### Büyültme - Yakınlaştırma
+
 
 ## **Kaynak**
 

@@ -13,6 +13,11 @@ func main() {
 	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
 	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
+	// Yöntem 1 : Bu yöntem, şu aşamada önerilmemektedir.
+	/*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{X: 200, Y: 300}, 0, 0.5)
+	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: img.Cols() / 2, Y: img.Rows() / 2})*/
+
+	// Yöntem 2 :
 	a := 200
 	b := 300
 

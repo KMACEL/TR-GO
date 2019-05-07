@@ -347,14 +347,14 @@ func main() {
     // Yöntem 1 :
     //gocv.BitwiseNot(img, &img)
 
-    // Uzun Yöntem :
+    // Yöntem 2 :
     for x := 0; x < img.Rows(); x++ {
         for y := 0; y < img.Cols(); y++ {
 
-            // 1. Uzun yöntem
+            // // Yöntem 2.1 :
             //imgTotal.SetIntAt(x, y, 255-img.GetIntAt(x, y))
 
-            //2. Dahada uzun yötem
+            // Yöntem 2.2 :
             p := img.GetIntAt(x, y)
 
             a := (p >> 24) & 0xff
@@ -463,7 +463,7 @@ func main() {
     // Yöntem 1 :
     //gocv.Rotate(img, &img, gocv.Rotate180Clockwise)
 
-    // Uzun Yöntem :
+    // Yöntem 2 :
     imgTotal := gocv.NewMat()
     imgTotal = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8UC3)
 
@@ -558,7 +558,7 @@ func main() {
     // Yöntem 1 :
     //gocv.Flip(img, &img, 1)
 
-    // Uzun Yöntem :
+    // Yöntem 2 :
     imgTotal := gocv.NewMat()
     imgTotal = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
     w := img.Cols()
@@ -678,7 +678,7 @@ func main() {
     /*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{X: img.Cols() / 2, Y: img.Rows() / 2}, 100, 1)
     gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
-    // Uzun Yöntem :
+    // Yöntem 2 :
     x0 := img.Rows() / 2
     y0 := img.Cols() / 2
 
@@ -763,8 +763,301 @@ Kodları çalıştırdığımızda ekran şu şekilde olacaktır.
 
 ![07_Tasima.png](01_Goruntu_Islemeye_Giris/resimler/07_Tasima.png)
 
-### Büyültme - Yakınlaştırma
+### **Büyültme - Yakınlaştırma**
 
+Yakınlaştırma, bir resim üzerindeki bir bölgeye, belirli oranda büyütülmesidir.
+
+#### **Yöntem 1**
+
+Bu yöntem, daha önce incelediğimiz gocv paketinin **GetRotationMatrix2D** fonskiyonu ile gerçekleştirilmektedir. Bu fonksyionun üçüncü parametresi, yakınlaştırma yada uzaklaştırma kat sayısını belirtmektedir. Biz burada, 2 kat yakınlaştırmak istediğimizi belirttik.
+
+```go
+rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2.0)
+gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})
+```
+
+#### **Yöntem 2**
+
+Bu yöntem, aşağıdaki resim gibi, bir pikselin belirli oranda diğer komşu piksellere aktarılması ile olmaktadır. Bu da şu şekilde olmaktadır;
+
+* f(x*2,y*2)=(x,y)
+* f(x*2+1,y*2)=(x,y)
+* f(x*2,y*2+1)=(x,y)
+* f(x*2+1,y*2+1)=(x,y)
+
+![08_Buyultme_Yakinlasitrma_1.png](01_Goruntu_Islemeye_Giris/resimler/08_Buyultme_Yakinlasitrma_1.png)
+
+Kodlaması ise şu şekildedir.
+
+```go
+for x := 0; x <= img.Rows(); x++ {
+    for y := 0; y <= img.Cols(); y++ {
+        p := img.GetUCharAt(x, y)
+
+        if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+            imgTotal.SetUCharAt(x*2, y*2, p)
+        }
+
+        if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+            imgTotal.SetUCharAt(x*2+1, y*2, p)
+        }
+
+        if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+            imgTotal.SetUCharAt(x*2, y*2+1, p)
+        }
+
+        if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+            imgTotal.SetUCharAt(x*2+1, y*2+1, p)
+        }
+    }
+}
+```
+
+Bütün proje kodları şu şekildedir;
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+f(x*2,y*2)=(x,y)
+f(x*2+1,y*2)=(x,y)
+f(x*2,y*2+1)=(x,y)
+f(x*2+1,y*2+1)=(x,y)
+*/
+
+func main() {
+    img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    // Yöntem 1 :
+    /*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2)
+    gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
+
+    // Yöntem 2 :
+    for x := 0; x <= img.Rows(); x++ {
+        for y := 0; y <= img.Cols(); y++ {
+
+            p := img.GetUCharAt(x, y)
+
+            if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+                imgTotal.SetUCharAt(x*2, y*2, p)
+            }
+
+            if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+                imgTotal.SetUCharAt(x*2+1, y*2, p)
+            }
+
+            if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+                imgTotal.SetUCharAt(x*2, y*2+1, p)
+            }
+
+            if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+                imgTotal.SetUCharAt(x*2+1, y*2+1, p)
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Büyültme-Yakınlaştırma")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodları çalıştırdığımızda karşımıza gelen ekran şu şekildedir.
+
+![08_Buyultme_Yakinlasitrma_2.png](01_Goruntu_Islemeye_Giris/resimler/08_Buyultme_Yakinlasitrma_2.png)
+
+### Küçültme - Uzaklaştırma
+
+Bu bölümde, resim boyutunu küçültmeyi inceleyeceğiz.
+
+#### **Yöntem 1**
+
+Bu yöntemde yine, gocv paketinin **GetRotationMatrix2D** fonksiyonunu kullanacağız. Bu fonskyionun üçüncü **scale** parametresini 0 ile 1 arasında düşürürsek, belirtilen oranda küçültme sağlayacaktır.
+
+```go
+rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 0.5)
+gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})
+```
+
+#### **Yöntem 2**
+
+Bu yöntemde, aşağıda bulunan resimdeki gibi bir formül uygulayacağız. Yani **f(x,y)=((x,y)+(x+1,y)+(x,y+1)+(x+1,y+1))/4** olarak belirteceğiz.
+
+![09_Kucultme_Uzaklastirma_1](01_Goruntu_Islemeye_Giris/resimler/09_Kucultme_Uzaklastirma_1.png)
+
+Bu formülün uygulanmış hali aşağıdadır. Diğer örnekten farklı olarak dikkat edilmesi gereken önemli husus, burada pikselleri aldıktan sonra ortlamasaı alınmaktadır. Diğer örnekte ise, aynı piksel bir çok farklı piksele aktarılmaktadır.
+
+```go
+for x := 0; x < img.Rows(); x++ {
+    for y := 0; y < img.Cols(); y++ {
+
+        var p, p2, p3, p4 uint8
+        if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+            p = img.GetUCharAt(x*2, y*2)
+        }
+
+        if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+            p2 = img.GetUCharAt(x*2+1, y*2)
+        }
+
+        if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+            p3 = img.GetUCharAt(x*2, y*2+1)
+        }
+
+        if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+            p4 = img.GetUCharAt(x*2+1, y*2+1)
+        }
+        total := (int(p) + int(p2) + int(p3) + int(p4)) / 4
+        imgTotal.SetUCharAt(x, y, uint8(total))
+    }
+}
+```
+
+Kodun tam hali şu şekildedir.
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+f(x,y)=((x,y)+(x+1,y)+(x,y+1)+(x+1,y+1))/4
+*/
+
+/*
+    -----------------
+    |p1 |p2 |p3 |p4 |       -----------------------------------------
+    -----------------       |(p1+p2+p5+p6)/4    |   (p3+p4+p7+p8)/4  |
+    |p5 |p6 |p7 |p8 | =     |(p9+p10+p13+p16)/4 |(p11+p12+p15+p16)/4 |
+    -----------------       -----------------------------------------
+    |p9 |p10|p11|p12|
+    -----------------
+    |p13|p14|p15|p16|
+    -----------------
+*/
+
+func main() {
+
+    img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    // Yöntem 1 :
+    /*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 0.5)
+    gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
+
+    // Yöntem 2 :
+
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+
+            var p, p2, p3, p4 uint8
+            if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+                p = img.GetUCharAt(x*2, y*2)
+            }
+
+            if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+                p2 = img.GetUCharAt(x*2+1, y*2)
+            }
+
+            if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+                p3 = img.GetUCharAt(x*2, y*2+1)
+            }
+
+            if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+                p4 = img.GetUCharAt(x*2+1, y*2+1)
+            }
+            total := (int(p) + int(p2) + int(p3) + int(p4)) / 4
+            imgTotal.SetUCharAt(x, y, uint8(total))
+        }
+    }
+
+    window := gocv.NewWindow("Küçültme - Uzaklaştırma")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodu çalıştırdığımızda, aşağıdaki gibi bir ekran gelecek.
+
+![09_Kucultme_Uzaklastirma_2](01_Goruntu_Islemeye_Giris/resimler/09_Kucultme_Uzaklastirma_2.png)
+
+### **Kenar Bulma**
+
+Kenar bulma, bir resmin üzerinde ani değişen hatların bulunması durumudur. Görüntü işlemede oldukça kullanılmaktadır.
+
+#### **Yöntem 1**
+
+Bu yöntemde, gocv paketinin **Canny** fonksiyonunu kullanacağız. Bu fonksiyon dört parametre almakta.
+
+* İlk parametre, işlem yapılacak resmin aktarıldığı **Mat** türündeki değişken,
+
+* İkinci parametre, işlem sonrası yeni resmin aktarılacağı **Mat** türündeki değişken,
+
+* Üçüncü ve dördüncü parametreler **threshold** yani eşik parametresidir. Bu parametreler, keskinliğin oranını belirtir. 
+
+```go
+gocv.Canny(img, &img2, 200, 200)
+```
+
+#### **Yöntem 2**
+
+Bu yöntemde, **|G| = |((p1+2*p2+p3)-(p7+2*p8+p9))| + |((p3+2*p6+p9)-(p1+2*p4+p7))|** formülü uygulanmaktadır. Uygulanış şekli aşağıdaki gibidir.
+
+```go
+for x := 0; x < img.Rows(); x++ {
+    for y := 0; y < img.Cols(); y++ {
+
+        p := img.GetIntAt(x-1, y-1)
+        p1 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x, y-1)
+        p2 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x+1, y-1)
+        p3 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x-1, y)
+        p4 := (p >> 16) & 0xff
+
+        //p = img.GetUCharAt(x, y)
+        //p5 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x+1, y)
+        p6 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x-1, y+1)
+        p7 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x, y+1)
+        p8 := (p >> 16) & 0xff
+
+        p = img.GetIntAt(x+1, y+1)
+        p9 := (p >> 16) & 0xff
+
+        pValue := math.Abs(float64((p1+2*p2+p3)-(p7+2*p8+p9))) + math.Abs(float64((p3+2*p6+p9)-(p1+2*p4+p7)))
+
+        if pValue > 255 {
+            pValue = 255
+            imgTotal.SetIntAt(x, y, int32(pValue))
+        }
+    }
+}
+```
+
+Kodları çalıştırdığımızda karşımıza aşağıdaki gibi bir ekran gelecektir.
+
+![10_Kenar_Belirleme](01_Goruntu_Islemeye_Giris/resimler/10_Kenar_Belirleme.png)
 
 ## **Kaynak**
 

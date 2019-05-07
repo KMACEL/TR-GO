@@ -4,6 +4,13 @@ import (
 	"gocv.io/x/gocv"
 )
 
+/*
+f(x*2,y*2)=(x,y)
+f(x*2+1,y*2)=(x,y)
+f(x*2,y*2+1)=(x,y)
+f(x*2+1,y*2+1)=(x,y)
+*/
+
 func main() {
 	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
 	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
@@ -12,7 +19,7 @@ func main() {
 	/*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 2)
 	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 	for x := 0; x <= img.Rows(); x++ {
 		for y := 0; y <= img.Cols(); y++ {
 

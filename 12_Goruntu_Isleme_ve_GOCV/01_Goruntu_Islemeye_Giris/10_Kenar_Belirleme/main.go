@@ -18,21 +18,16 @@ import (
 // Formül : |G| =|((p1+2*p2+p3)-(p7+2*p8+p9))| + |((p3+2*p6+p9)-(p1+2*p4+p7))|
 
 func main() {
-	img := gocv.NewMat()
-	img2 := gocv.NewMat()
 
-	defer img.Close()
-	defer img2.Close()
-
-	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
+	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
 	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
 
 	// Yöntem 1 :
-	//gocv.Canny(img, &img2, 200, 200)
+	//gocv.Canny(img, &imgTotal, 200, 200)
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 	for x := 0; x < img.Rows(); x++ {
 		for y := 0; y < img.Cols(); y++ {
 
@@ -67,7 +62,7 @@ func main() {
 
 			if pValue > 255 {
 				pValue = 255
-				img2.SetIntAt(x, y, int32(pValue))
+				imgTotal.SetIntAt(x, y, int32(pValue))
 			}
 		}
 	}
@@ -75,7 +70,7 @@ func main() {
 	window := gocv.NewWindow("Kenar Belirleme")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
 
 }

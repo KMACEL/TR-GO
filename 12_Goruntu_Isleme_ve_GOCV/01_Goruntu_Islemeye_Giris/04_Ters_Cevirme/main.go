@@ -17,7 +17,7 @@ func main() {
 	// Yöntem 1 :
 	//gocv.Rotate(img, &img, gocv.Rotate180Clockwise)
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 	imgTotal := gocv.NewMat()
 	imgTotal = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8UC3)
 

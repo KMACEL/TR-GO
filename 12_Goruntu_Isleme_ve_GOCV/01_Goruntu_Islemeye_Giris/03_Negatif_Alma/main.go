@@ -17,14 +17,14 @@ func main() {
 	// Yöntem 1 :
 	//gocv.BitwiseNot(img, &img)
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 	for x := 0; x < img.Rows(); x++ {
 		for y := 0; y < img.Cols(); y++ {
 
-			// 1. Uzun yöntem
+			// Yöntem 2.1 :
 			//imgTotal.SetIntAt(x, y, 255-img.GetIntAt(x, y))
 
-			//2. Dahada uzun yötem
+			// Yöntem 2.2 :
 			p := img.GetIntAt(x, y)
 
 			a := (p >> 24) & 0xff

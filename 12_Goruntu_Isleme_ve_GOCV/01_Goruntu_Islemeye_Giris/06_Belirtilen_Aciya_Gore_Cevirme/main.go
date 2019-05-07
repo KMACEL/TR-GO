@@ -20,7 +20,7 @@ func main() {
 	/*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{X: img.Cols() / 2, Y: img.Rows() / 2}, -120, 1)
 	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 
 	x0 := img.Rows() / 2
 	y0 := img.Cols() / 2

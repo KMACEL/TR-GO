@@ -5,6 +5,10 @@ import (
 )
 
 /*
+f(x,y)=((x,y)+(x+1,y)+(x,y+1)+(x+1,y+1))/4
+*/
+
+/*
 	-----------------
 	|p1 |p2 |p3 |p4 |    	-----------------------------------------
 	-----------------  		|(p1+p2+p5+p6)/4    |   (p3+p4+p7+p8)/4  |
@@ -17,45 +21,41 @@ import (
 */
 
 func main() {
-	img := gocv.NewMat()
-	img2 := gocv.NewMat()
 
-	defer img.Close()
-	defer img2.Close()
-
-	img = gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
-
-	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+	img := gocv.IMRead("../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
 	// Yöntem 1 :
-	/*img3 := gocv.NewMat()
-	img3 = gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 0.5)
+	/*rotationMatrixSettings := gocv.GetRotationMatrix2D(image.Point{0, 0}, 0.0, 0.5)
+	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
-	gocv.WarpAffine(img, &img2, img3, image.Point{X: 0, Y: 0})*/
+	// Yöntem 2 :
+	for x := 0; x < img.Rows(); x++ {
+		for y := 0; y < img.Cols(); y++ {
 
-	// Uzun Yöntem :
-	var x, y int
-	for i := 0; i < img.Rows(); i = i + 2 {
-		y = 0
-		for j := 0; j < img.Cols(); j = j + 2 {
+			var p, p2, p3, p4 uint8
+			if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+				p = img.GetUCharAt(x*2, y*2)
+			}
 
-			p := img.GetUCharAt(i, j)
-			p2 := img.GetUCharAt(i+1, j)
-			p3 := img.GetUCharAt(i, j+1)
-			p4 := img.GetUCharAt(i+1, j+1)
-			t := (int(p) + int(p2) + int(p3) + int(p4)) / 4
+			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
+				p2 = img.GetUCharAt(x*2+1, y*2)
+			}
 
-			img2.SetUCharAt(x, y, uint8(t))
-			y++
+			if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+				p3 = img.GetUCharAt(x*2, y*2+1)
+			}
+
+			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
+				p4 = img.GetUCharAt(x*2+1, y*2+1)
+			}
+			total := (int(p) + int(p2) + int(p3) + int(p4)) / 4
+			imgTotal.SetUCharAt(x, y, uint8(total))
 		}
-		x++
 	}
-
 	window := gocv.NewWindow("Küçültme - Uzaklaştırma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

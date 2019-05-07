@@ -17,7 +17,7 @@ func main() {
 	// Yöntem 1 :
 	//gocv.Flip(img, &img, 1)
 
-	// Uzun Yöntem :
+	// Yöntem 2 :
 	imgTotal := gocv.NewMat()
 	imgTotal = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 	w := img.Cols()

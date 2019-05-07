@@ -20,25 +20,26 @@ func main() {
 	gocv.WarpAffine(img, &imgTotal, rotationMatrixSettings, image.Point{X: 0, Y: 0})*/
 
 	// Yöntem 2 :
+	zoomValue := 2
 	for x := 0; x <= img.Rows(); x++ {
 		for y := 0; y <= img.Cols(); y++ {
 
 			p := img.GetUCharAt(x, y)
 
-			if x*2 >= 0 && x*2 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
-				imgTotal.SetUCharAt(x*2, y*2, p)
+			if x*zoomValue >= 0 && x*zoomValue <= img.Rows() && y*zoomValue >= 0 && y*zoomValue <= img.Cols() {
+				imgTotal.SetUCharAt(x*zoomValue, y*zoomValue, p)
 			}
 
-			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2 >= 0 && y*2 <= img.Cols() {
-				imgTotal.SetUCharAt(x*2+1, y*2, p)
+			if x*zoomValue+1 >= 0 && x*zoomValue+1 <= img.Rows() && y*zoomValue >= 0 && y*zoomValue <= img.Cols() {
+				imgTotal.SetUCharAt(x*zoomValue+1, y*zoomValue, p)
 			}
 
-			if x*2 >= 0 && x*2 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
-				imgTotal.SetUCharAt(x*2, y*2+1, p)
+			if x*zoomValue >= 0 && x*zoomValue <= img.Rows() && y*zoomValue+1 >= 0 && y*zoomValue+1 <= img.Cols() {
+				imgTotal.SetUCharAt(x*zoomValue, y*zoomValue+1, p)
 			}
 
-			if x*2+1 >= 0 && x*2+1 <= img.Rows() && y*2+1 >= 0 && y*2+1 <= img.Cols() {
-				imgTotal.SetUCharAt(x*2+1, y*2+1, p)
+			if x*zoomValue+1 >= 0 && x*zoomValue+1 <= img.Rows() && y*zoomValue+1 >= 0 && y*zoomValue+1 <= img.Cols() {
+				imgTotal.SetUCharAt(x*zoomValue+1, y*zoomValue+1, p)
 			}
 		}
 	}

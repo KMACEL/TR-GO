@@ -1010,7 +1010,7 @@ Bu yöntemde, gocv paketinin **Canny** fonksiyonunu kullanacağız. Bu fonksiyon
 * Üçüncü ve dördüncü parametreler **threshold** yani eşik parametresidir. Bu parametreler, keskinliğin oranını belirtir. 
 
 ```go
-gocv.Canny(img, &img2, 200, 200)
+gocv.Canny(img, &imgTotal, 200, 200)
 ```
 
 #### **Yöntem 2**
@@ -1063,6 +1063,327 @@ Kodları çalıştırdığımızda karşımıza aşağıdaki gibi bir ekran gele
 ![10_Kenar_Belirleme](01_Goruntu_Islemeye_Giris/resimler/10_Kenar_Belirleme.png)
 
 ### Görüntü İyileştirme
+
+#### Parlaklık Arttırma
+
+Parlaklık arttırma, resmin belirtilen oranda renginin açılma işlemidir.
+
+##### Yöntem 1
+
+Bu yöntem, gocv paketinin **ConvertScaleAbs** fonksiyonu ile sağlanmaktadır. Bu fonksiyon 4 parametre alıyor.
+
+* İlk parametre işlem yapılacak olan **Mat** türündeki değişken,
+
+* İkinci parametre işlem sonrası aktarılacak olan **Mat** türündeki değişken,
+
+* Üçüncü parametre **alpha** değeri,
+
+* Dördüncü parametre **beta** değeri,
+
+**Alpha** değeri **contrast** değerini belirtirken, **Beta** değeri **parlaklık** için kullanulır.
+
+```go
+gocv.ConvertScaleAbs(img, &imgTotal, 1.0, 100.0)
+```
+
+##### Yöntem 2
+
+Bu yöntemde, **I'(x,y) = I(x,y) + K** formülü kullanılacaktır. Formül uygulama aşamasında bir **if** sorgusu bulunmaktadır. Bu sorgunun amacı, **uchar** yani **uint8** 0 - 255 arası bir değer almaktadır. Önceki değer ile, parlaklık değeri toplanınca bu sınırın dışına çıkabilir. Bizde eğer bu sınırın dışında ise sınırın en üst seviyesi olan **255** olsun dedik.
+
+```go
+value := 100
+for x := 0; x < img.Rows(); x++ {
+    for y := 0; y < img.Cols(); y++ {
+        p := img.GetUCharAt(x, y)
+
+        if t := int(p) + value; t > 255 {
+            imgTotal.SetUCharAt(x, y, 255)
+        } else {
+            imgTotal.SetUCharAt(x, y, uint8(t))
+        }
+    }
+}
+```
+
+Projemizdeki kodun tam hali şu şekildedir;
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+I'(x,y) = I(x,y) + K
+*/
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+
+    // Yöntem 1 :
+    // Beta değeri parlaklık, Alpha değeri contrast
+    //gocv.ConvertScaleAbs(img, &imgTotal, 1.0, 100.0)
+
+    // Yöntem 2 :
+    value := 100
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+            p := img.GetUCharAt(x, y)
+
+            if t := int(p) + value; t > 255 {
+                imgTotal.SetUCharAt(x, y, 255)
+            } else {
+                imgTotal.SetUCharAt(x, y, uint8(t))
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Parlaklık Arttırmak")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Programı çalıştırdıktan sonra karşımıza gelen sonuç aşağıdaki gibidir;
+
+![11_01_Parlaklik_Arttirma](01_Goruntu_Islemeye_Giris/resimler/11_01_Parlaklik_Arttirma.png)
+
+#### Parlaklık Azaltma
+
+Parlaklık arttırma, resmin belirtilen oranda renginin koyulaştırma işlemidir. Bu proje, bir önceki proje ile hemen hemen aynıdır. Tek fark değerin ana renkten çıkarılacak olmasıdır.
+
+##### Yöntem 1
+
+İlk yöntemde, bir önceki projede olan **Beta** değerini negatif bir sayı verilerek, parlaklığını azaltıyoruz.
+
+```go
+gocv.ConvertScaleAbs(img, &imgTotal, 1.0, -100.0)
+```
+
+##### Yöntem 2
+
+Bu yöntemde kullanılan formül, **I'(x,y) = I(x,y) - K**
+
+Bu sefer **if** bloğundai **0** dan küçük olma durumu incelenir.
+
+```go
+value := 100
+for i := 0; i < img.Rows(); i++ {
+    for j := 0; j < img.Cols(); j++ {
+        p := img.GetUCharAt(i, j)
+
+        if t := int(p) - value; t < 0 {
+            imgTotal.SetUCharAt(i, j, 0)
+        } else {
+            imgTotal.SetUCharAt(i, j, uint8(t))
+        }
+    }
+}
+```
+
+Projenin bütün kodu şu şekildedir;
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+I'(x,y) = I(x,y) - K
+*/
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    // Yöntem 1 :
+    //gocv.ConvertScaleAbs(img, &imgTotal, 1.0, -100.0)
+
+    // Yöntem 2 :
+    value := 100
+    for i := 0; i < img.Rows(); i++ {
+        for j := 0; j < img.Cols(); j++ {
+            p := img.GetUCharAt(i, j)
+
+            if t := int(p) - value; t < 0 {
+                imgTotal.SetUCharAt(i, j, 0)
+            } else {
+                imgTotal.SetUCharAt(i, j, uint8(t))
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Parlaklık Arttırmak")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodu çalıştırdıktan sonra karşımıza gelen ekran şu şekildedir;
+
+![11_02_Parlaklik_Azaltma](01_Goruntu_Islemeye_Giris/resimler/11_02_Parlaklik_Azaltma.png)
+
+#### Contrast Arttırma
+
+ **Contrast**, bir görüntünün, en parlak bölüm ile en karanlık bölüm arasındaki farktır. Bunu arttırıp azaltarak aradaki oranı değiştirebilmekteyiz.
+
+##### Yöntem 1
+
+Daha önce kullandığımız **ConvertScaleAbs** fonksiyonunu **Alpha** değeri ile **Contrast** değerimizi arttıralım,
+
+```go
+gocv.ConvertScaleAbs(img, &imgTotal, 5.0, 1.0)
+```
+
+##### Yöntem 2
+
+**Contrast** değerini arttırmak için kullandığımız formül **I'(x,y) = I(x,y) * K**
+
+```go
+value := 5
+for x := 0; x < img.Rows(); x++ {
+    for y := 0; y < img.Cols(); y++ {
+        p := img.GetUCharAt(x, y)
+
+        if t := int(p) * value; t > 255 {
+            imgTotal.SetUCharAt(x, y, 255)
+        } else {
+            imgTotal.SetUCharAt(x, y, uint8(t))
+        }
+    }
+}
+```
+
+Kodumuzun tam hali şu şekildedir;
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+I'(x,y) = I(x,y) * K
+*/
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    // Yöntem 1 :
+    //gocv.ConvertScaleAbs(img, &imgTotal, 5.0, 1.0)
+
+    // Yöntem 2 :
+    value := 5
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+            p := img.GetUCharAt(x, y)
+
+            if t := int(p) * value; t > 255 {
+                imgTotal.SetUCharAt(x, y, 255)
+            } else {
+                imgTotal.SetUCharAt(x, y, uint8(t))
+            }
+        }
+    }
+
+    window := gocv.NewWindow("Contrast Arttırmak")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodumuzu çalıştırdıktan sonra ekrana aşağıdaki gibi sonuç gelecektir.
+
+![11_03_Contrast_Arttirma](01_Goruntu_Islemeye_Giris/resimler/11_03_Contrast_Arttirma.png)
+
+#### Contrast Azaltma
+
+Contrast azaltma işlemi, fark olarak sadece çarpı yeri bölüm olacaktır.
+
+##### Yöntem 1
+
+Contrast azaltma işlemi için **Alpha** değerine, 1 den düşük değer veriyoruz.
+
+```go
+gocv.ConvertScaleAbs(img, &imgTotal, 0.2, 1.0)
+```
+
+##### Yöntem 2
+
+Contrast azaltma projesi için kullandığımız formül, I'(x,y) = I(x,y) / K
+
+```go
+value := 5
+for x := 0; x < img.Rows(); x++ {
+    for y := 0; y < img.Cols(); y++ {
+        p := img.GetUCharAt(x, y)
+
+        p = p / uint8(value)
+        imgTotal.SetUCharAt(x, y, p)
+    }
+}
+```
+
+Kodumuzun tam hali aşağıdaki gibidir;
+
+```go
+package main
+
+import (
+	"gocv.io/x/gocv"
+)
+
+/*
+I'(x,y) = I(x,y) / K
+*/
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    // Yöntem 1 :
+    //gocv.ConvertScaleAbs(img, &imgTotal, 0.2, 1.0)
+
+    // Yöntem 2 :
+    value := 5
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+            p := img.GetUCharAt(x, y)
+
+            p = p / uint8(value)
+            imgTotal.SetUCharAt(x, y, p)
+        }
+    }
+
+    window := gocv.NewWindow("Contrast Azaltma")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodumuzu çalıştırdıktan sonra karşımıza aşağıdaki gibi bir ekran gelecektir.
+
+![11_04_Contrast_Azaltma](01_Goruntu_Islemeye_Giris/resimler/11_04_Contrast_Azaltma.png)
 
 
 ## **Kaynak**

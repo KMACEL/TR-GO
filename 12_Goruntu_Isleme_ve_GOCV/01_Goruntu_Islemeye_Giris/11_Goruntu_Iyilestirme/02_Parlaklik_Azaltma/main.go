@@ -9,37 +9,30 @@ I'(x,y) = I(x,y) - K
 */
 
 func main() {
-	img := gocv.NewMat()
-	img2 := gocv.NewMat()
 
-	defer img.Close()
-	defer img2.Close()
-
-	img = gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadAnyColor)
-	img2 = gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
-
-	gocv.CvtColor(img, &img, gocv.ColorBGRAToGray)
+	img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+	imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
 
 	// Yöntem 1 :
-	//gocv.ConvertScaleAbs(img, &img2, 1.0, -100.0)
-	// Uzun Yöntem :
+	//gocv.ConvertScaleAbs(img, &imgTotal, 1.0, -100.0)
+
+	// Yöntem 2 :
 	value := 100
 	for i := 0; i < img.Rows(); i++ {
 		for j := 0; j < img.Cols(); j++ {
 			p := img.GetUCharAt(i, j)
 
 			if t := int(p) - value; t < 0 {
-				img2.SetUCharAt(i, j, 0)
+				imgTotal.SetUCharAt(i, j, 0)
 			} else {
-				img2.SetUCharAt(i, j, uint8(t))
+				imgTotal.SetUCharAt(i, j, uint8(t))
 			}
 		}
 	}
 
-	window := gocv.NewWindow("Parlaklık Arttırmak")
+	window := gocv.NewWindow("Parlaklık Azaltma")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
-	window.IMShow(img2)
+	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

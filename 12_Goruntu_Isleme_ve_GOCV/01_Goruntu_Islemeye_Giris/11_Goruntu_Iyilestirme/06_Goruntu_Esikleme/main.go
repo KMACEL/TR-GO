@@ -23,10 +23,9 @@ func main() {
 		}
 	}
 
-	window := gocv.NewWindow("Görüntü Eşitleme")
+	window := gocv.NewWindow("Görüntü Eşikleme")
 	window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
 
 	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

@@ -1385,6 +1385,95 @@ Kodumuzu çalıştırdıktan sonra karşımıza aşağıdaki gibi bir ekran gele
 
 ![11_04_Contrast_Azaltma](01_Goruntu_Islemeye_Giris/resimler/11_04_Contrast_Azaltma.png)
 
+#### Görüntü Karşıtlığının Yayılması
+
+Karşıtlık yayma işlemi, bir görüntü üzerindeki en düşük ve en yüksek piksel değerlerine göre resmin düzenlenmesi işlemidir.  Bu işlemde; en küçük değer 0, en büyük değer 255 değerine çekilir ve diğer piksel değerleri ise bu aralıkta olması gereken değeri alır.
+
+Bu işlem için **I'(x,y)=((I(x,y)-min)/(max-min))*255** formülü kullanulmaktadır. Bu formüldeki **min** ve **max** değerlerini, gocv paketinin **MinMaxLoc** fonksiyonu ile almaktayız. Bu fonksiyon, resmin aktarıldığı **Mat** türündeki matrisi parametre olarak alır ve geriye, **en düşük değer**, **en yüksek değer**, **en düşük konum** ve **en yüksek konum** bilgilerini barındırır.
+
+Programın tam hali aşağıdaki gibidir.
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+/*
+I'(x,y)=((I(x,y)-min)/(max-min))*255
+*/
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    min, max, _, _ := gocv.MinMaxLoc(img)
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+            p := img.GetUCharAt(x, y)
+
+            p = uint8(((float32(p) - min) / (max - min)) * 255)
+            imgTotal.SetUCharAt(x, y, p)
+        }
+    }
+
+    window := gocv.NewWindow("Görüntü Karşıtlığını Alma")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodları çalıştırdığımızda sonuç aşağıdaki gibidir;
+
+![11_05_Goruntu_Karsitliginin_Yayilmasi](01_Goruntu_Islemeye_Giris/resimler/11_05_Goruntu_Karsitliginin_Yayilmasi.png)
+
+#### Görüntü Eşitleme
+
+Bir görüntüden, belli bir değere göre ikili resim elde edilmesi işlemidir. Bu değere eşik değeri denir. Bir piksel eşik değerinden büyük ise 255, küçük ise 0 değeri yazılır. Böylece ikili resim elde edilmiş olur.
+
+Bu projenin kodları aşağıdaki gibidir. Biz eşik değeri olarak **127** verdik. Siz, projenize göre değişiklikler yapabilirsiniz.
+
+```go
+package main
+
+import (
+    "gocv.io/x/gocv"
+)
+
+func main() {
+
+    img := gocv.IMRead("../../MERT_KUBRA_ERDEM.jpg", gocv.IMReadGrayScale)
+    imgTotal := gocv.NewMatWithSize(img.Rows(), img.Cols(), gocv.MatTypeCV8U)
+
+    for x := 0; x < img.Rows(); x++ {
+        for y := 0; y < img.Cols(); y++ {
+            p := img.GetUCharAt(x, y)
+
+            if p > 127 {
+                p = 255
+            } else {
+                p = 0
+            }
+
+            imgTotal.SetUCharAt(x, y, p)
+        }
+    }
+
+    window := gocv.NewWindow("Görüntü Eşikleme")
+    window.SetWindowProperty(gocv.WindowPropertyAutosize, gocv.WindowAutosize)
+
+    window.IMShow(imgTotal)
+    window.WaitKey(0)
+}
+```
+
+Kodları çalıştırdıktan sonra sonuç aşağıdaki gibidir.
+
+![11_06_Goruntu_Esikleme](01_Goruntu_Islemeye_Giris/resimler/11_06_Goruntu_Esikleme.png)
 
 ## **Kaynak**
 

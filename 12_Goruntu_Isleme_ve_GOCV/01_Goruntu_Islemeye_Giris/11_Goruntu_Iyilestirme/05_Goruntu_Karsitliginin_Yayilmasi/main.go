@@ -30,5 +30,4 @@ func main() {
 
 	window.IMShow(imgTotal)
 	window.WaitKey(0)
-
 }

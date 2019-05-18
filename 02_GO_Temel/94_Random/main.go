@@ -7,9 +7,8 @@ import (
 )
 
 func main() {
-	max := 0
-	min := 50
-	s1 := rand.NewSource(time.Now().UnixNano())
-	r1 := rand.New(s1)
-	fmt.Println(r1.Intn(max-min) + min)
+	rand.Seed(time.Now().UnixNano())
+	min := 10
+	max := 30
+	fmt.Println(rand.Intn(max-min) + min)
 }

@@ -1,0 +1,51 @@
+No,Alternatif,Cuma,Açlık,Doluluk,Ücret,Yağmur,Rezervasyon,Tip,Bek_süresi,Bek_Durumu
+1,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger ,>60,Hayır
+2,Evet,Hayır,Evet,Kısmen,Pahalı,Hayır,Evet,Döner,0-10,Hayır
+3,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Hayır,Lokanta,30-60,Evet
+4,Hayır,Hayır,Hayır,Kısmen,Ucuz,Hayır,Hayır,Burger ,0-10,Evet
+5,Evet,Evet,Evet,Dolu,Ucuz,Evet,Hayır,Lokanta,10-30,Evet
+6,Evet,Evet,Hayır,Dolu,Pahalı,Hayır,Evet,Döner,>60,Hayır
+7,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Evet,İskender,0-10,Evet
+8,Hayır,Hayır,Hayır,Boş,Ucuz,Evet,Hayır,Burger ,0-10,Hayır
+9,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Evet,Lokanta,0-10,Evet
+10,Evet,Evet,Evet,Dolu,Pahalı,Hayır,Evet,İskender,10-30,Hayır
+11,Hayır,Hayır,Hayır,Boş,Ucuz,Hayır,Hayır,Lokanta,0-10,Evet
+12,Evet,Evet,Evet,Dolu,Ucuz,Hayır,Hayır,Burger ,30-60,Hayır
+13,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger ,>60,Hayır
+14,Evet,Hayır,Evet,Kısmen,Pahalı,Hayır,Evet,Döner,0-10,Hayır
+15,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Hayır,Lokanta,30-60,Evet
+16,Hayır,Hayır,Hayır,Kısmen,Ucuz,Hayır,Hayır,Burger ,0-10,Evet
+17,Evet,Evet,Evet,Dolu,Ucuz,Evet,Hayır,Lokanta,10-30,Evet
+18,Evet,Evet,Hayır,Dolu,Pahalı,Hayır,Evet,Döner,>60,Hayır
+19,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Evet,İskender,0-10,Evet
+20,Hayır,Hayır,Hayır,Boş,Ucuz,Evet,Hayır,Burger ,0-10,Hayır
+21,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Evet,Lokanta,0-10,Evet
+22,Evet,Evet,Evet,Dolu,Pahalı,Hayır,Evet,İskender,10-30,Hayır
+23,Hayır,Hayır,Hayır,Boş,Ucuz,Hayır,Hayır,Lokanta,0-10,Evet
+24,Evet,Evet,Evet,Dolu,Ucuz,Hayır,Hayır,Burger ,30-60,Evet
+25,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger ,>60,Hayır
+26,Evet,Hayır,Evet,Kısmen,Pahalı,Hayır,Evet,Döner,0-10,Evet
+27,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Hayır,Lokanta,30-60,Evet
+28,Hayır,Hayır,Hayır,Kısmen,Ucuz,Hayır,Hayır,Burger ,0-10,Hayır
+29,Evet,Evet,Evet,Dolu,Ucuz,Evet,Hayır,Lokanta,10-30,Evet
+30,Evet,Evet,Hayır,Dolu,Pahalı,Hayır,Hayır,Döner,>60,Evet
+31,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Hayır,İskender,0-10,Hayır
+32,Hayır,Evet,Hayır,Boş,Ucuz,Evet,Evet,Burger ,0-10,Evet
+33,Hayır,Evet,Evet,Kısmen,Orta,Evet,Hayır,Lokanta,0-10,Hayır
+34,Evet,Hayır,Evet,Kısmen,Pahalı,Hayır,Hayır,İskender,10-30,Evet
+35,Hayır,Evet,Hayır,Kısmen,Ucuz,Hayır,Evet,Lokanta,0-10,Hayır
+36,Evet,Hayır,Evet,Boş,Ucuz,Hayır,Evet,Burger ,30-60,Evet
+37,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger ,>60,Evet
+38,Evet,Evet,Evet,Kısmen,Pahalı,Hayır,Evet,Döner,0-10,Hayır
+39,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Hayır,Burger ,30-60,Evet
+40,Hayır,Evet,Hayır,Boş,Ucuz,Hayır,Evet,Burger ,0-10,Hayır
+41,Evet,Hayır,Evet,Dolu,Ucuz,Evet,Evet,Burger ,10-30,Hayır
+42,Evet,Hayır,Hayır,Kısmen,Pahalı,Hayır,Hayır,Döner,>60,Evet
+43,Hayır,Evet,Evet,Kısmen,Orta,Evet,Hayır,İskender,0-10,Evet
+44,Hayır,Evet,Hayır,Boş,Ucuz,Evet,Evet,İskender,0-10,Evet
+45,Hayır,Hayır,Evet,Kısmen,Orta,Evet,Evet,Lokanta,0-10,Hayır
+46,Evet,Hayır,Evet,Boş,Pahalı,Hayır,Hayır,İskender,10-30,Evet
+47,Hayır,Evet,Hayır,Dolu,Ucuz,Hayır,Hayır,Lokanta,0-10,Hayır
+48,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Evet,İskender,30-60,Evet
+49,Hayır,Evet,Hayır,Boş,Ucuz,Hayır,Evet,Lokanta,0-10,Hayır
+50,Evet,Evet,Evet,Dolu,Ucuz,Hayır,Hayır,Döner,30-60,Evet

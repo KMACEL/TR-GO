@@ -1,0 +1,16 @@
+No,Alternatif,Cuma,Açlık,Doluluk,Ücret,Yağmur,Rezervasyon,Tip,Bek_süresi,Bek_Durumu
+1,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger,>60,Hayır
+3,Evet,Hayır,Evet,Dolu,Ucuz,Hayır,Hayır,Lokanta,30-60,Evet
+6,Evet,Evet,Hayır,Dolu,Pahalı,Hayır,Evet,Döner,>60,Hayır
+14,Evet,Hayır,Evet,Kısmen,Pahalı,Hayır,Evet,Döner,0-10,Hayır
+16,Hayır,Hayır,Hayır,Kısmen,Ucuz,Hayır,Hayır,Burger,0-10,Evet
+20,Hayır,Hayır,Hayır,Boş,Ucuz,Evet,Hayır,Burger,0-10,Hayır
+24,Evet,Evet,Evet,Dolu,Ucuz,Hayır,Hayır,Burger,30-60,Evet
+25,Hayır,Evet,Hayır,Dolu,Ucuz,Evet,Hayır,Burger,>60,Hayır
+28,Hayır,Hayır,Hayır,Kısmen,Ucuz,Hayır,Hayır,Burger,0-10,Hayır
+30,Evet,Evet,Hayır,Dolu,Pahalı,Hayır,Hayır,Döner,>60,Evet
+35,Hayır,Evet,Hayır,Kısmen,Ucuz,Hayır,Evet,Lokanta,0-10,Hayır
+40,Hayır,Evet,Hayır,Boş,Ucuz,Hayır,Evet,Burger,0-10,Hayır
+42,Evet,Hayır,Hayır,Kısmen,Pahalı,Hayır,Hayır,Döner,>60,Evet
+46,Evet,Hayır,Evet,Boş,Pahalı,Hayır,Hayır,İskender,10-30,Evet
+50,Evet,Evet,Evet,Dolu,Ucuz,Hayır,Hayır,Döner,30-60,Evet

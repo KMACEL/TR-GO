@@ -4,7 +4,7 @@
 
 ## **GOCV**
 
-**"GOCV"**, **"Hybridgroup"** tarafından **"Opencv"** kütüphanesinin **"Go"**ya uyarlanmış halidir. Şu an **Opencv**'nin resmi olarak **Go** kütüphanesi yoktur. Fakat **GOCV** oldukça iyi hazırlanmıştır. **GOCV** için **"<https://gocv.io/>"** adresine bakabilirsiniz.
+**"GOCV"**, **"Hybridgroup"** tarafından **"Opencv"** kütüphanesinin **"Go"**'ya uyarlanmış halidir. Şu an **Opencv**'nin resmi olarak **Go** kütüphanesi yoktur. Fakat **GOCV** oldukça iyi hazırlanmıştır. **GOCV** için **"<https://gocv.io/>"** adresine bakabilirsiniz.
 
 ### **Yükleme**
 

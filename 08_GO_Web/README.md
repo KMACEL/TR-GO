@@ -37,3 +37,5 @@ go get github.com/gorilla/sessions
 > Cloud Native programming with Golang : Mina Andrawos, Martin Helmich
 >
 > <https://gowebexamples.com/>
+>
+> <https://tutorialedge.net/golang/go-webassembly-tutorial/>

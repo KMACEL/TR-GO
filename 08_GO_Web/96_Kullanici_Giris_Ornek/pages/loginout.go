@@ -37,6 +37,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			errc.ErrorCenter("Login -> Store.New ", errStoreNew)
 
 			session.Values["username"] = username
+			session.Values["SendMessage"] = -1
 			err := session.Save(r, w)
 			if err != nil {
 				errc.ErrorCenter("Login ->  session.Save ", err)
@@ -44,13 +45,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			}
 
 			logPages("Login", r, session.Name(), session.Values["username"], nil)
-
 			http.Redirect(w, r, "/getInfo", http.StatusFound)
 		}
-
 	}
 
-	if err := template.Must(template.ParseFiles("gtpl/login.gtpl")).Execute(w, conditionsMap); err != nil {
+	if err := template.Must(template.ParseFiles("templates/login.html")).Execute(w, conditionsMap); err != nil {
 		log.Println(err)
 	}
 }

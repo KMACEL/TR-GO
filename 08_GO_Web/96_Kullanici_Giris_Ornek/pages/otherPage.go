@@ -49,7 +49,7 @@ func OtherPage(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	if err := template.Must(template.ParseFiles("gtpl/otherPage.gtpl")).Execute(w, conditionsMap); err != nil {
+	if err := template.Must(template.ParseFiles("templates/otherPage.html")).Execute(w, conditionsMap); err != nil {
 		errc.ErrorCenter("Other Page -> template.Must ", err)
 		log.Println(err)
 	}

@@ -72,7 +72,7 @@ func GetInfo(w http.ResponseWriter, r *http.Request) {
 		conditionsMap["DeviceIDNullError"] = false
 	}
 
-	if err := template.Must(template.ParseFiles("gtpl/getInfo.gtpl")).Execute(w, conditionsMap); err != nil {
+	if err := template.Must(template.ParseFiles("templates/getInfo.html")).Execute(w, conditionsMap); err != nil {
 		log.Println(err)
 	}
 }

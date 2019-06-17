@@ -23,6 +23,8 @@ func init() {
 func main() {
 	if databasecenter.StartDatabase() {
 		//databasecenter.AddUser("mertacel", "12344321", "admin")
+		fileServer := http.FileServer(http.Dir("static"))
+		http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 		http.HandleFunc("/", pages.Login)
 		http.HandleFunc("/login", pages.Login)

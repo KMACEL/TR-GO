@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/gobuffalo/uuid v2.0.5+incompatible // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
+	github.com/gorilla/mux v1.7.3
 	github.com/gorilla/sessions v1.1.3
 	github.com/gorilla/websocket v1.4.0
 	github.com/hashicorp/go-multierror v1.0.0 // indirect

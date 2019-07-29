@@ -4,9 +4,12 @@ go 1.12
 
 require (
 	github.com/creack/goselect v0.1.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ble/ble v0.0.0-20190521171521-147700f13610 // indirect
+	github.com/go-oauth2/gin-server v0.0.0-20190119052936-0d298614c9ba
+	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gobuffalo/uuid v2.0.5+incompatible // indirect
 	github.com/gocql/gocql v0.0.0-20190708145057-55a38e15c5db
@@ -42,9 +45,11 @@ require (
 	gocv.io/x/gocv v0.20.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
 	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
+	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
 	golang.org/x/text v0.3.2 // indirect
 	golang.org/x/tools v0.0.0-20190709211700-7b25e351ac0e // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	gopkg.in/oauth2.v3 v3.10.1
 	periph.io/x/periph v3.4.0+incompatible // indirect
 )

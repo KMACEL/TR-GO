@@ -8,6 +8,8 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ble/ble v0.0.0-20190521171521-147700f13610 // indirect
+	github.com/go-kit/kit v0.9.0
+	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/go-oauth2/gin-server v0.0.0-20190119052936-0d298614c9ba
 	github.com/go-pg/pg v8.0.6+incompatible
 	github.com/go-pg/pg/v9 v9.0.0-beta.9

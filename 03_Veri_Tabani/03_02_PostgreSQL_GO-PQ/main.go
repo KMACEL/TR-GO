@@ -52,13 +52,13 @@ func main() {
 
 	tests := []Test{
 		{
-			Id:   1,
+
 			Name: "Mert",
 		}, {
-			Id:   2,
+
 			Name: "Erdem",
 		}, {
-			Id:   3,
+
 			Name: "Kübra",
 		}}
 

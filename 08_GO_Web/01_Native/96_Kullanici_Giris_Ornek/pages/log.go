@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/KMACEL/TR-Go/08_GO_Web/96_Kullanici_Giris_Ornek/errc"
-	"github.com/KMACEL/TR-Go/08_GO_Web/96_Kullanici_Giris_Ornek/logc"
+	"github.com/KMACEL/TR-Go/08_GO_Web/01_Native/96_Kullanici_Giris_Ornek/errc"
+	"github.com/KMACEL/TR-Go/08_GO_Web/01_Native/96_Kullanici_Giris_Ornek/logc"
 )
 
 func logPages(page string, r *http.Request, sessionName string, sessionUsername interface{}, deviceID interface{}) {

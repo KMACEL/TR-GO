@@ -11,7 +11,6 @@ require (
 	github.com/go-kit/kit v0.9.0
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/go-oauth2/gin-server v0.0.0-20190119052936-0d298614c9ba
-	github.com/go-pg/pg v8.0.6+incompatible
 	github.com/go-pg/pg/v9 v9.0.0-beta.9
 	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-stack/stack v1.8.0 // indirect
@@ -25,9 +24,8 @@ require (
 	github.com/gorilla/sessions v1.2.0
 	github.com/gorilla/websocket v1.4.0
 	github.com/hashicorp/go-multierror v1.0.0 // indirect
-	github.com/kr/pty v1.1.8 // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
-	github.com/mattn/go-sqlite3 v1.10.0
+	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/mgutz/logxi v0.0.0-20161027140823-aebf8a7d67ab // indirect
 	github.com/nats-io/gnatsd v1.4.1 // indirect
@@ -38,7 +36,6 @@ require (
 	github.com/raff/goble v0.0.0-20190228063054-5a206277e735 // indirect
 	github.com/sigurn/crc8 v0.0.0-20160107002456-e55481d6f45c // indirect
 	github.com/sigurn/utils v0.0.0-20151230205143-f19e41f79f8f // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/ugorji/go v1.1.7 // indirect
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
@@ -50,9 +47,10 @@ require (
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586
 	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
 	golang.org/x/text v0.3.2 // indirect
-	golang.org/x/tools v0.0.0-20190709211700-7b25e351ac0e // indirect
+	gopkg.in/go-playground/validator.v8 v8.18.2
 	gopkg.in/oauth2.v3 v3.10.1
 	periph.io/x/periph v3.4.0+incompatible // indirect
 )

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/KMACEL/TR-Go/08_GO_Web/96_Kullanici_Giris_Ornek/logc"
+	"github.com/KMACEL/TR-Go/08_GO_Web/01_Native/96_Kullanici_Giris_Ornek/logc"
 )
 
 var Debug = true

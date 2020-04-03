@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/KMACEL/TR-Go/08_GO_Web/96_Kullanici_Giris_Ornek/errc"
+	"github.com/KMACEL/TR-Go/08_GO_Web/01_Native/96_Kullanici_Giris_Ornek/errc"
 )
 
 // OtherPage is

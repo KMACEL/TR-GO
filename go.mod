@@ -17,7 +17,6 @@ require (
 	github.com/gobuffalo/uuid v2.0.5+incompatible // indirect
 	github.com/gocql/gocql v0.0.0-20190708145057-55a38e15c5db
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
-	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/go-cmp v0.3.0 // indirect
 	github.com/gorilla/mux v1.7.3
@@ -38,6 +37,8 @@ require (
 	github.com/sigurn/utils v0.0.0-20151230205143-f19e41f79f8f // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/ugorji/go v1.1.7 // indirect
+	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
+	github.com/vmihailenco/msgpack/v4 v4.3.11 // indirect
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
 	go.bug.st/serial.v1 v0.0.0-20180827123349-5f7892a7bb45 // indirect
@@ -45,7 +46,6 @@ require (
 	gobot.io/x/gobot v1.13.0
 	gocv.io/x/gocv v0.20.0
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586
-	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
